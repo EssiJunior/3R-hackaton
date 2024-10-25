@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button";
 import Section from "@/components/Section"
+import { LinkPreview } from "@/components/ui/LinkPreview";
 import { Timeline } from "@/components/ui/Timeline";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -26,7 +27,12 @@ const Info = () => {
                             className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
                         />
                     </div>
-                    <a href="https://www.cameroon-tribune.cm/article.html/57887/fr.html/pollution-par-les-matieres-plastiques-600-000-tonnes-de-dechets-au" className="text-secondary dark:text-primary" target='_blank'>Read full article...</a>
+                    <LinkPreview
+                        url="https://www.cameroon-tribune.cm/article.html/57887/fr.html/pollution-par-les-matieres-plastiques-600-000-tonnes-de-dechets-au"
+                        className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
+                    >
+                        Read full article...
+                    </LinkPreview>
                 </div>
             ),
         },
@@ -38,9 +44,15 @@ const Info = () => {
                         Cameroun : les start-up s&apos;attaquent au recyclage des déchets plastiques
                     </p>
                     <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-                        Le Cameroun produit 600 000 tonnes de déchets plastiques chaque année qui s'entassent dans des décharges sauvages ou viennent polluer les cours d&#39;eau...
+                        Le Cameroun produit 600 000 tonnes de déchets plastiques chaque année qui s&apos;entassent dans des décharges sauvages ou viennent polluer les cours d&#39;eau...
                     </p>
-                    <a href="https://www.france24.com/fr/%C3%A9missions/focus/20221027-cameroun-les-start-up-s-attaquent-au-recyclage-des-d%C3%A9chets-plastiques" className="text-secondary dark:text-primary" target='_blank'>Read full article...</a>
+                    <LinkPreview
+                        url="https://www.france24.com/fr/%C3%A9missions/focus/20221027-cameroun-les-start-up-s-attaquent-au-recyclage-des-d%C3%A9chets-plastiques"
+                        className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
+                        
+                    >
+                        Read full article...
+                    </LinkPreview>
                 </div>
             ),
         },
@@ -63,7 +75,13 @@ const Info = () => {
                             className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
                         />
                     </div>
-                    <a href="https://enactafrica.org/enact-observer/le-plastique-de-contrebande-saccage-lenvironnement-au-cameroun#:~:text=En%20septembre%202020%2C%20800%20kg,dans%20la%20r%C3%A9gion%20du%20Nord." className="text-secondary dark:text-primary" target='_blank'>Read full article...</a>
+                    <LinkPreview
+                        url="https://enactafrica.org/enact-observer/le-plastique-de-contrebande-saccage-lenvironnement-au-cameroun#:~:text=En%20septembre%202020%2C%20800%20kg,dans%20la%20r%C3%A9gion%20du%20Nord."
+                        className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
+                        
+                    >
+                        Read full article...
+                    </LinkPreview>
                 </div>
             ),
         },
@@ -74,7 +92,7 @@ const Info = () => {
             <main className=" bg-n-2/30 dark:bg-n-8/90 pb-10">
                 <Timeline data={data} />
                 <div className="ml-10">
-                    <Button text="Learn more >" handleClick={() => router.push('/info')}/>
+                    <Button text="Learn more >" handleClick={() => router.push('/info')} />
                 </div>
             </main>
         </Section>

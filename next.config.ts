@@ -29,6 +29,9 @@ const nextConfig: NextConfig = {
         port: '',
       },
     ],
+    domains: [
+      "api.microlink.io", // Microlink Image Preview
+    ],
   },
 };
 

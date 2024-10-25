@@ -11,11 +11,15 @@ import Image from "next/image";
 import { useHash } from '@/hooks/useHash';
 import { logoDark, logoLight } from '@/public/assets';
 import { Button } from "@/components/Button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
     // const params = useParams();
     const [openNavigation, setOpenNavigation] = useState(false);
     const [theme, setTheme] = useState('dark');
+
+    const router = useRouter();
 
     const toggleNavigation = () => {
         if (openNavigation) {
@@ -59,14 +63,14 @@ const Header = () => {
                 }`}
         >
             <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto">
-                <a className="block w-[12rem] xl:mr-8 py-2" href="#hero">
+                <Link className="block w-[12rem] xl:mr-8 py-2" href="/">
                     <Image
                         src={theme === 'light' ? logoDark : logoLight}
                         alt="Le Do Quintal"
                         width={85}
                         height={30}
                     />
-                </a>
+                </Link>
 
                 <nav
                     className={`${openNavigation ? "flex" : "hidden"
@@ -136,7 +140,7 @@ const Header = () => {
 
                     }
                 </a>
-                <Button text="Sign In" />
+                <Button text="Sign In" handleClick={() => router.push('/signin')} />
 
                 <div className="ml-auto lg:hidden flex items-center">
                     <a
@@ -184,7 +188,7 @@ const Header = () => {
                         }
                     </a>
 
-                    <Button text="Sign In" />
+                    <Button text="Sign In" handleClick={() => router.push("/signin")} />
 
                 </div>
             </div>

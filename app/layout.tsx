@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${sparkyRegular.variable} antialiased font-mono bg-white dark:bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sparkyRegular.variable} antialiased font-mono bg-n-1 dark:bg-n-8/90`}
       >
         <Header />
         {children}

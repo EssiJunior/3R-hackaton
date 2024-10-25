@@ -1,6 +1,6 @@
 const Hero = () => {
     return (
-        <main>
+        <main className="bg-primary">
             Hero
         </main>
     )

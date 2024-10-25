@@ -21,7 +21,9 @@ import {
   Briefcase,
   Calendar,
   FileText,
-  Settings
+  Settings,
+  Menu as MenuIcon,
+  X
 } from 'lucide-react'
 
 const data = [
@@ -41,6 +43,8 @@ export default function DashboardPage() {
     { id: 3, name: 'Pierre Martin', role: 'Chauffeur', performance: 78 },
   ])
   const [newAgent, setNewAgent] = useState({ name: '', role: '', performance: 0 })
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('dashboard')
 
   const handleAddAgent = (e: React.FormEvent) => {
     e.preventDefault()
@@ -49,31 +53,171 @@ export default function DashboardPage() {
     setShowAddAgentModal(false)
   }
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'planning':
+        return (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Planification</h2>
+            <p>Ici, vous pouvez gérer la planification des collectes et des équipes.</p>
+          </div>
+        )
+      case 'reports':
+        return (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Rapports</h2>
+            <p>Consultez et générez des rapports détaillés sur les performances et les opérations.</p>
+          </div>
+        )
+      case 'settings':
+        return (
+          <div className="bg-white rounded-lg shadow p-6">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">Paramètres</h2>
+            <p>Configurez les paramètres de l application et gérez les préférences utilisateur.</p>
+          </div>
+        )
+      default:
+        return (
+          <>
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Collecté</h3>
+                <p className="text-3xl font-bold text-primary">15,890 kg</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">Taux de Recyclage</h3>
+                <p className="text-3xl font-bold text-primary">68%</p>
+              </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">Satisfaction Client</h3>
+                <p className="text-3xl font-bold text-primary">4.7/5</p>
+              </div>
+            </div>
+
+            {/* Chart */}
+            <div className="bg-white rounded-lg shadow p-6 mb-8">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">Performance Mensuelle</h2>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={data}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="collecte" fill="#82c247" />
+                  <Bar dataKey="recyclage" fill="#519258" />
+                  <Bar dataKey="valorisation" fill="#2a5a40" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Agents List */}
+            <div className="bg-white rounded-lg shadow overflow-hidden">
+              <div className="flex justify-between items-center p-6 border-b">
+                <h2 className="text-xl font-semibold text-gray-800">Agents</h2>
+                <button 
+                  onClick={() => setShowAddAgentModal(true)}
+                  className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
+                >
+                  <UserPlus size={18} className="inline-block mr-2" />
+                  Ajouter un agent
+                </button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rôle</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Performance</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {agents.map((agent) => (
+                      <tr key={agent.id}>
+                        <td className="px-6 py-4 whitespace-nowrap">{agent.name}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">{agent.role}</td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="w-full bg-gray-200 rounded-full h-2.5">
+                              <div className="bg-primary h-2.5 rounded-full" style={{ width: `${agent.performance}%` }}></div>
+                            </div>
+                            <span className="ml-2 text-sm text-gray-600">{agent.performance}%</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <button className="text-indigo-600 hover:text-indigo-900 mr-2">
+                            <Edit size={18} />
+                          </button>
+                          <button className="text-red-600 hover:text-red-900">
+                            <Trash2 size={18} />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        )
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 bg-primary text-white w-64 hidden md:block">
-        <div className="flex items-center justify-center h-16 border-b border-primary-dark">
+      <aside className={`fixed inset-y-0 left-0 bg-primary text-white w-64 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-200 ease-in-out z-30`}>
+        <div className="flex items-center justify-between h-16 border-b border-primary-dark px-4">
           <span className="text-2xl font-bold">3R Dashboard</span>
+          <button className="md:hidden" onClick={toggleMobileMenu}>
+            <X size={24} />
+          </button>
         </div>
         <nav className="mt-8">
-          <a className="block py-2 px-4 text-sm hover:bg-primary-dark" href="#">
+          <a 
+            className={`block py-2 px-4 text-sm hover:bg-primary-dark ${activeSection === 'dashboard' ? 'bg-primary-dark' : ''}`} 
+            href="#"
+            onClick={() => setActiveSection('dashboard')}
+          >
             <Briefcase className="inline-block mr-2" size={18} />
             Vue densemble
           </a>
-          <a className="block py-2 px-4 text-sm hover:bg-primary-dark" href="#">
+          <a 
+            className={`block py-2 px-4 text-sm hover:bg-primary-dark ${activeSection === 'agents' ? 'bg-primary-dark' : ''}`} 
+            href="#"
+            onClick={() => setActiveSection('agents')}
+          >
             <User className="inline-block mr-2" size={18} />
             Agents
           </a>
-          <a className="block py-2 px-4 text-sm hover:bg-primary-dark" href="#">
+          <a 
+            className={`block py-2 px-4 text-sm hover:bg-primary-dark ${activeSection === 'planning' ? 'bg-primary-dark' : ''}`} 
+            href="#"
+            onClick={() => setActiveSection('planning')}
+          >
             <Calendar className="inline-block mr-2" size={18} />
             Planification
           </a>
-          <a className="block py-2 px-4 text-sm hover:bg-primary-dark" href="#">
+          <a 
+            className={`block py-2 px-4 text-sm hover:bg-primary-dark ${activeSection === 'reports' ? 'bg-primary-dark' : ''}`} 
+            href="#"
+            onClick={() => setActiveSection('reports')}
+          >
             <FileText className="inline-block mr-2" size={18} />
             Rapports
           </a>
-          <a className="block py-2 px-4 text-sm hover:bg-primary-dark" href="#">
+          <a 
+            className={`block py-2 px-4 text-sm hover:bg-primary-dark ${activeSection === 'settings' ? 'bg-primary-dark' : ''}`} 
+            href="#"
+            onClick={() => setActiveSection('settings')}
+          >
             <Settings className="inline-block mr-2" size={18} />
             Paramètres
           </a>
@@ -84,7 +228,12 @@ export default function DashboardPage() {
       <div className="md:ml-64 p-8">
         {/* Header */}
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">Tableau de bord</h1>
+          <div className="flex items-center">
+            <button className="mr-4 md:hidden" onClick={toggleMobileMenu}>
+              <MenuIcon size={24} />
+            </button>
+            <h1 className="text-2xl font-bold text-gray-800">Tableau de bord</h1>
+          </div>
           <div className="flex items-center space-x-4">
             <button className="p-2 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
               <Bell size={20} />
@@ -92,98 +241,19 @@ export default function DashboardPage() {
             <div className="relative">
               <button className="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
                 <img src="/placeholder.svg" alt="Profile" className="w-8 h-8 rounded-full" />
-                <span>John Doe</span>
+                <span className="hidden md:inline">John Doe</span>
                 <ChevronDown size={16} />
               </button>
             </div>
           </div>
         </header>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Total Collecté</h3>
-            <p className="text-3xl font-bold text-primary">15,890 kg</p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Taux de Recyclage</h3>
-            <p className="text-3xl font-bold text-primary">68%</p>
-          </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Satisfaction Client</h3>
-            <p className="text-3xl font-bold text-primary">4.7/5</p>
-          </div>
-        </div>
-
-        {/* Chart */}
-        <div className="bg-white rounded-lg shadow p-6 mb-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Performance Mensuelle</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="collecte" fill="#82c247" />
-              <Bar dataKey="recyclage" fill="#519258" />
-              <Bar dataKey="valorisation" fill="#2a5a40" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Agents List */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="flex justify-between items-center p-6 border-b">
-            <h2 className="text-xl font-semibold text-gray-800">Agents</h2>
-            <button 
-              onClick={() => setShowAddAgentModal(true)}
-              className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
-            >
-              <UserPlus size={18} className="inline-block mr-2" />
-              Ajouter un agent
-            </button>
-          </div>
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nom</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rôle</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Performance</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {agents.map((agent) => (
-                <tr key={agent.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">{agent.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{agent.role}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
-                        <div className="bg-primary h-2.5 rounded-full" style={{ width: `${agent.performance}%` }}></div>
-                      </div>
-                      <span className="ml-2 text-sm text-gray-600">{agent.performance}%</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <button className="text-indigo-600 hover:text-indigo-900 mr-2">
-                      <Edit size={18} />
-                    </button>
-                    <button className="text-red-600 hover:text-red-900">
-                      <Trash2 size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {renderContent()}
       </div>
 
       {/* Add Agent Modal */}
       {showAddAgentModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 w-full max-w-md">
             <h2 className="text-2xl font-bold mb-4">Ajouter un agent</h2>
             <form onSubmit={handleAddAgent}>
@@ -227,7 +297,8 @@ export default function DashboardPage() {
                   max="100"
                   placeholder="Performance de l'agent"
                   value={newAgent.performance}
-                  onChange={(e) => setNewAgent({ ...newAgent, performance: parseInt(e.target.value) })}
+                  onChange={(e) => setNewAgent({ ...newAgent, performance: parseInt(e.target.value) 
+})}
                   required
                 />
               </div>

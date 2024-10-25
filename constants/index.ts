@@ -30,6 +30,7 @@ export const navigation = [
     },
 ];
 
+
 export const pricing = [
     {
         id: "0",

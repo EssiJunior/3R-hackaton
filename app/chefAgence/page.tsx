@@ -23,7 +23,8 @@ import {
   FileText,
   Settings,
   Menu as MenuIcon,
-  X
+  X,
+  Loader
 } from 'lucide-react'
 
 const data = [
@@ -37,12 +38,15 @@ const data = [
 
 export default function DashboardPage() {
   const [showAddAgentModal, setShowAddAgentModal] = useState(false)
+  const [showEditAgentModal, setShowEditAgentModal] = useState(false)
   const [agents, setAgents] = useState([
     { id: 1, name: 'Jean Dupont', role: 'Collecteur', performance: 85 },
     { id: 2, name: 'Marie Curie', role: 'Trieur', performance: 92 },
     { id: 3, name: 'Pierre Martin', role: 'Chauffeur', performance: 78 },
   ])
   const [newAgent, setNewAgent] = useState({ name: '', role: '', performance: 0 })
+  const [editingAgent, setEditingAgent] = useState(null)
+  const [deletingAgentId, setDeletingAgentId] = useState(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('dashboard')
 
@@ -51,6 +55,26 @@ export default function DashboardPage() {
     setAgents([...agents, { ...newAgent, id: agents.length + 1 }])
     setNewAgent({ name: '', role: '', performance: 0 })
     setShowAddAgentModal(false)
+  }
+
+  const handleEditAgent = (agent) => {
+    setEditingAgent(agent)
+    setShowEditAgentModal(true)
+  }
+
+  const handleUpdateAgent = (e: React.FormEvent) => {
+    e.preventDefault()
+    setAgents(agents.map(agent => agent.id === editingAgent.id ? editingAgent : agent))
+    setShowEditAgentModal(false)
+    setEditingAgent(null)
+  }
+
+  const handleDeleteAgent = async (id) => {
+    setDeletingAgentId(id)
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    setAgents(agents.filter(agent => agent.id !== id))
+    setDeletingAgentId(null)
   }
 
   const toggleMobileMenu = () => {
@@ -152,11 +176,22 @@ export default function DashboardPage() {
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <button className="text-indigo-600 hover:text-indigo-900 mr-2">
+                          <button 
+                            className="text-indigo-600 hover:text-indigo-900 mr-2"
+                            onClick={() => handleEditAgent(agent)}
+                          >
                             <Edit size={18} />
                           </button>
-                          <button className="text-red-600 hover:text-red-900">
-                            <Trash2 size={18} />
+                          <button 
+                            className="text-red-600 hover:text-red-900"
+                            onClick={() => handleDeleteAgent(agent.id)}
+                            disabled={deletingAgentId === agent.id}
+                          >
+                            {deletingAgentId === agent.id ? (
+                              <Loader size={18} className="animate-spin" />
+                            ) : (
+                              <Trash2 size={18} />
+                            )}
                           </button>
                         </td>
                       </tr>
@@ -187,7 +222,7 @@ export default function DashboardPage() {
             onClick={() => setActiveSection('dashboard')}
           >
             <Briefcase className="inline-block mr-2" size={18} />
-            Vue densemble
+            Vue d ensemble
           </a>
           <a 
             className={`block py-2 px-4 text-sm hover:bg-primary-dark ${activeSection === 'agents' ? 'bg-primary-dark' : ''}`} 
@@ -241,7 +276,7 @@ export default function DashboardPage() {
             <div className="relative">
               <button className="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
                 <img src="/placeholder.svg" alt="Profile" className="w-8 h-8 rounded-full" />
-                <span className="hidden md:inline">John Doe</span>
+                <span className="hidden md:inline">Ariel fossi</span>
                 <ChevronDown size={16} />
               </button>
             </div>
@@ -265,6 +300,7 @@ export default function DashboardPage() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   type="text"
+                  
                   placeholder="Nom de l'agent"
                   value={newAgent.name}
                   onChange={(e) => setNewAgent({ ...newAgent, name: e.target.value })}
@@ -297,8 +333,7 @@ export default function DashboardPage() {
                   max="100"
                   placeholder="Performance de l'agent"
                   value={newAgent.performance}
-                  onChange={(e) => setNewAgent({ ...newAgent, performance: parseInt(e.target.value) 
-})}
+                  onChange={(e) => setNewAgent({ ...newAgent, performance: parseInt(e.target.value) })}
                   required
                 />
               </div>
@@ -315,6 +350,76 @@ export default function DashboardPage() {
                   className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded"
                 >
                   Ajouter
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Agent Modal */}
+      {showEditAgentModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Modifier l agent</h2>
+            <form onSubmit={handleUpdateAgent}>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="edit-name">
+                  Nom
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="edit-name"
+                  type="text"
+                  placeholder="Nom de l'agent"
+                  value={editingAgent.name}
+                  onChange={(e) => setEditingAgent({ ...editingAgent, name: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="edit-role">
+                  Rôle
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="edit-role"
+                  type="text"
+                  placeholder="Rôle de l'agent"
+                  value={editingAgent.role}
+                  onChange={(e) => setEditingAgent({ ...editingAgent, role: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="edit-performance">
+                  Performance (%)
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="edit-performance"
+                  type="number"
+                  min="0"
+                  max="100"
+                  placeholder="Performance de l'agent"
+                  value={editingAgent.performance}
+                  onChange={(e) => setEditingAgent({ ...editingAgent, performance: parseInt(e.target.value) })}
+                  required
+                />
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowEditAgentModal(false)}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2"
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  className="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded"
+                >
+                  Mettre à jour
                 </button>
               </div>
             </form>

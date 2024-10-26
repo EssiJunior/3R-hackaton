@@ -21,8 +21,7 @@ export const navigation = [
     {
         id: "3",
         title: "Contact",
-        url: "#contact",
-        onlyMobile: true,
+        url: "/contact",
     },
 ];
 

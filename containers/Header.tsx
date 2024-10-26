@@ -82,11 +82,10 @@ const Header = () => {
                                 key={item.id}
                                 href={item.url}
                                 onClick={handleClick}
-                                className={`block relative font-code text-2xl uppercase text-n-9 dark:text-n-1 transition-colors hover:text-color-1 ${item.onlyMobile ? "lg:hidden" : ""
-                                    } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-[1.125rem] lg:font-semibold ${item.url === hash
-                                        ? "z-2 lg:text-n-1"
+                                className={`block relative font-code text-2xl uppercase text-n-9 dark:text-n-1 transition-colors hover:text-color-1 px-4 xl:px-8 py-6 md:py-8 lg:-mr-0.25 lg:text-[1.125rem] lg:font-semibold ${item.url === hash
+                                        ? "z-2 lg:text-n-1 dark:text-white"
                                         : "lg:text-n-8 dark:lg:text-n-1/50"
-                                    } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
+                                    } lg:leading-5 lg:hover:text-primary lg:hover:dark:text-primary`}
                             >
                                 {item.title}
                             </a>
@@ -97,7 +96,7 @@ const Header = () => {
                 </nav>
 
                 <a
-                    href="#theme"
+                    href="#"
                     className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
                 >
 

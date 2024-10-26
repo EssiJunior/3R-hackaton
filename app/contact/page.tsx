@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import Heading from '@/components/Heading'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -65,9 +66,12 @@ const ContactPage = () => {
 
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="mt-32 bg-n-2/30 dark:bg-n-8/90 max-w-7xl w-full">
+      <div className="mt-32 max-w-7xl w-full">
         <main className="pb-10">
-          <h1 className="text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-8 text-center">Contactez 3R</h1>
+          <Heading
+            tag="CONTACT US"
+            title="You have a question to ask? Let us know"
+          />
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -82,7 +86,7 @@ const ContactPage = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 bg-white dark:bg-gray-800 text-neutral-800 dark:text-neutral-200"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 bg-n-3/40 dark:bg-n-5/40 px-3 text-neutral-800 dark:text-neutral-200"
                   />
                 </div>
                 <div>
@@ -96,7 +100,7 @@ const ContactPage = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 bg-white dark:bg-gray-800 text-neutral-800 dark:text-neutral-200"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 bg-n-3/40 dark:bg-n-5/40 px-3 text-neutral-800 dark:text-neutral-200"
                   />
                 </div>
                 <div>
@@ -110,7 +114,7 @@ const ContactPage = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 bg-white dark:bg-gray-800 text-neutral-800 dark:text-neutral-200"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 bg-n-3/40 dark:bg-n-5/40 px-3 text-neutral-800 dark:text-neutral-200"
                   ></textarea>
                 </div>
                 <button
@@ -121,9 +125,9 @@ const ContactPage = () => {
                 </button>
               </form>
             </div>
-            <div> 
+            <div>
               <Image
-                src="/acceuil.webp"
+                src="/assets/images/contact.jpeg"
                 alt="3R Contact"
                 width={500}
                 height={300}
@@ -136,13 +140,6 @@ const ContactPage = () => {
                     <div>{item.content}</div>
                   </div>
                 ))}
-              </div>
-              <div className="mt-8">
-                <h3 className="font-bold text-neutral-800 dark:text-neutral-200 mb-4">En savoir plus sur 3R</h3>
-                <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
-                  3R est une plateforme dédiée à la réduction, réutilisation et au recyclage des déchets plastiques au Cameroun. Nous travaillons pour un avenir plus propre et plus durable.
-                </p>
-                
               </div>
             </div>
           </div>

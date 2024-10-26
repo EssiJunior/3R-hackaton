@@ -13,7 +13,7 @@ interface Company {
   name: string;
   lastUpdateTime: string;
   neighborhood: string;
-  color: string; // Couleur pour l'icône
+  color: string; 
 }
 
 const StyledMapContainer = styled(MapContainer)`

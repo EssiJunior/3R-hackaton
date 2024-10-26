@@ -121,9 +121,9 @@ const ContactPage = () => {
                 </button>
               </form>
             </div>
-            <div>
+            <div> 
               <Image
-                src="/3r-contact-image.jpg"
+                src="/acceuil.webp"
                 alt="3R Contact"
                 width={500}
                 height={300}

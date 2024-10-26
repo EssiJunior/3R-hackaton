@@ -3,7 +3,37 @@
 import Map from '@/app/localisation/mapComponent';
 import { useEffect, useState } from 'react';
 import image from '@/public/assets/location/1.jpg'
+
 const HomePage = () => {
+
+  
+
+const companies = [
+  {
+    latitude: 3.8862848,
+    longitude: 11.5081216,
+    photoUrl: 'url_to_photo1',
+    name: 'Entreprise 1',
+    lastUpdateTime: '2024-10-26',
+    neighborhood: 'Quartier 1',
+    color: '#3498db', // Couleur de l'icône
+  },
+  {
+
+// 3.8862848
+// 11.5081216
+    latitude: 3.8575,
+    longitude: 11.3585,
+    photoUrl: 'url_to_photo2',
+    name: 'Entreprise 2',
+    lastUpdateTime: '2024-10-26',
+    neighborhood: 'Quartier 2',
+    color: '#e74c3c', // Couleur de l'icône
+  },
+  // Ajoutez d'autres entreprises...
+];
+
+
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const [neighborhood, setNeighborhood] = useState(null);
   const [error, setError] = useState(null);
@@ -49,12 +79,7 @@ const HomePage = () => {
     <div>
       <h1>Localisation sur la carte</h1>
       {error && <p style={{ color: 'red' }}>Erreur : {error}</p>}
-      <Map
-        latitude={latitude}
-        longitude={longitude}
-        neighborhood={neighborhood}
-        photoUrl={'assets/location/2.jpg'}
-      />
+    <Map companies={companies} />
     </div>
   );
 };

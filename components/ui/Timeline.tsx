@@ -11,7 +11,7 @@ interface TimelineEntry {
     content: React.ReactNode;
 }
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+export const Timeline = ({ data, isInfoPage }: { data: TimelineEntry[], isInfoPage?: boolean }) => {
     const ref = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [height, setHeight] = useState(0);
@@ -33,14 +33,14 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
     return (
         <div
-            className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10"
+            className="w-full md:px-10"
             ref={containerRef}
         >
-            <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-                <h2 className="text-lg md:text-4xl mb-4 text-black dark:text-white max-w-3xl">
+            <div className={`max-w-7xl mx-auto px-4 md:px-8 lg:px-10  ${isInfoPage ? 'py-10':'py-20'}`}>
+                <h2 className={`text-lg md:text-4xl mb-4 ${isInfoPage ? 'text-secondary dark:text-primary':'text-black dark:text-white max-w-3xl'} `}>
                     Impact of plastic pollution in Cameroon environment and tourism
                 </h2>
-                <p className="text-neutral-700 dark:text-neutral-300 text-sm md:text-base max-w-lg">
+                <p className={` text-sm md:text-base ${isInfoPage ? 'text-black dark:text-white':'text-neutral-700 dark:text-neutral-300 max-w-3xl'} `}>
                     We&apos;ve made deep researches, and obtained verified and certified results from highly coherent journals. Here&apos;s
                     a timeline on their response about the impact of plastic pollution in Cameroon environment and tourism.
                 </p>
@@ -53,10 +53,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                         className="flex justify-start pt-10 md:pt-40 md:gap-10"
                     >
                         <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-                            <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
-                                <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 p-2" />
+                            <div className="h-10 absolute left-3 md:left-3 w-10 rounded-full bg-n-8/90 dark:bg-n-2/90 flex items-center justify-center">
+                                <div className="h-4 w-4 rounded-full bg-neutral-200 dark:bg-neutral-800 border-2 border-primary dark:border-secondary p-2" />
                             </div>
-                            <h3 className="hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-neutral-500 dark:text-neutral-500 ">
+                            <h3 className={`hidden md:block text-xl md:pl-20 md:text-5xl font-bold text-secondary dark:text-primary`}>
                                 {item.title}
                             </h3>
                         </div>
@@ -80,7 +80,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
                             height: heightTransform,
                             opacity: opacityTransform,
                         }}
-                        className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-purple-500 via-blue-500 to-transparent from-[0%] via-[10%] rounded-full"
+                        className="absolute inset-x-0 top-0  w-[2px] bg-gradient-to-t from-primary via-secondary to-transparent from-[0%] via-[10%] rounded-full"
                     />
                 </div>
             </div>

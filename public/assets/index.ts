@@ -14,6 +14,12 @@ const stars = "/assets/images/svg/stars.svg";
 const check = "/assets/images/svg/check.svg";
 const lines = "/assets/images/svg/lines.svg";
 
+const romaka = "/assets/images/team/romaka.jpeg";
+const arthur = "/assets/images/team/arthur.jpeg";
+const bevanie = "/assets/images/team/bevanie.jpeg";
+const yves = "/assets/images/team/yves.jpeg";
+const essi = "/assets/images/team/essi.jpeg";
+
 export {
   logoLight,
   logoDark,
@@ -25,5 +31,10 @@ export {
   smallSphere,
   stars,
   check,
-  lines
+  lines,
+  romaka,
+  arthur,
+  bevanie,
+  yves,
+  essi,
 };

@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         hostname: "cdn.unenvironment.org",
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: "images.unsplash.com",
+        port: '',
+      },
     ],
     domains: [
       "api.microlink.io", // Microlink Image Preview

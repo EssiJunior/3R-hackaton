@@ -26,7 +26,7 @@ const Footer = () => {
         <main
             className={`w-full z-50  border-t border-primary lg:bg-n-1 dark:lg:bg-n-8/90 lg:backdrop-blur-sm `}
         >
-            <section className="flex items-start justify-start flex-wrap [&>aside]:min-w-[200px] [&>aside]:h-full  [&>aside]:flex-1 [&>aside]:justify-start px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto py-10">
+            <section className="flex items-start justify-start flex-wrap [&>aside]:min-w-[200px] [&>aside]:h-full  [&>aside]:flex-1 [&>aside]:justify-start px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto py-12">
                 <aside className="">
                     <Link className="block dark:hidden w-[12rem] xl:mr-8 py-2" href="/">
                         <Image
@@ -99,7 +99,7 @@ const Footer = () => {
                     />
                 </aside>
             </section>
-            <section className="flex justify-end items-center w-full h-[50px] bg-secondary dark:bg-primary">
+            <section className="flex justify-end items-center w-full h-[30px] bg-secondary dark:bg-primary">
                 <div className="flex flex-1 h-[2px] bg-white ms-5 rounded-lg"></div>
                 <div className="mx-5 flex gap-4">
                     <Link href="/terms">Terms & Conditions</Link>

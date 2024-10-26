@@ -129,13 +129,27 @@ export default function AuthPage() {
                 <label className="block text-sm font-bold mb-2" htmlFor="signUpPassword">Mot de passe</label>
                 <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpPassword" type="password" placeholder="Mot de passe" required />
               </div>
+              
+              {/* Ajout des boutons radio */}
+              <div className="flex items-center mb-4">
+                <label className="mr-4">
+                  <input type="radio" name="userType" value="menage" required />
+                  Ménage
+                </label>
+                <label>
+                  <input type="radio" name="userType" value="entreprise" required />
+                  Entreprise
+                </label>
+              </div>
+
               <div>
                 <button className="bg-primary hover:bg-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
-                  Sinscrire
+                  S inscrire
                 </button>
               </div>
             </form>
           )}
+
 
           {/* Formulaire de récupération de mot de passe */}
           {activeForm === 'forgotPassword' && (

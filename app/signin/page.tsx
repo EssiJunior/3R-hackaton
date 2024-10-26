@@ -10,6 +10,7 @@ type FormValues = {
   username:string,
   email:string,
   password:string,
+  lacation_color:string,
   phone_number:string,
 }
 
@@ -22,6 +23,7 @@ export default function AuthPage() {
     const auhtentification = new Auth()
     const { register, handleSubmit } = useForm<FormValues>()
     const onSubmit: SubmitHandler<FormValues> = (data) => {
+        data['lacation_color']=`#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
         console.log(data)
        if(activeForm==="signIn"){
             auhtentification.login({formData:data})

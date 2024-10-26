@@ -1,10 +1,11 @@
-'use client'
+'use client';
 
 import { useState, useEffect, useRef } from 'react'
-import { MapContainer, TileLayer, Marker, Tooltip, Circle, ZoomControl, LayersControl, FeatureGroup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Tooltip, ZoomControl, LayersControl, FeatureGroup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import styled from 'styled-components'
+import { AccessTokenDecode } from '@/utils/TokenDecode';
 
 interface MapProps {
   latitude: number;
@@ -12,8 +13,10 @@ interface MapProps {
   photoUrl: string;
   childname: string;
   lastupdateTime: string;
-  neighborhood :string
+  neighborhood: string;
 }
+
+
 
 const StyledMapContainer = styled(MapContainer)`
   height: 600px;
@@ -63,29 +66,21 @@ const CustomLayersControl = styled(LayersControl)`
   }
 `
 
-const locationIcon = new L.Icon({
-    iconUrl: 'assets/location/1.png',  // Remplacez par le chemin de l'image de localisation
-    iconSize: [50, 50],  // Ajustez la taille selon vos besoins
-    iconAnchor: [25, 50], // Ancre au centre bas de l'icône
-  });
+const svgIcon = new L.DivIcon({
+  className: 'custom-icon',
+  html: `<svg fill =${AccessTokenDecode.location_color} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24" fill="#3498db"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>`
+});
 
-
-const Map: React.FC<MapProps> = ({ latitude, longitude, childname, photoUrl, lastupdateTime ,neighborhood}) => {
+const Map: React.FC<MapProps> = ({ latitude, longitude, childname, photoUrl, lastupdateTime, neighborhood }) => {
   const mapRef = useRef<L.Map | null>(null);
   const [zoomLevel, setZoomLevel] = useState(13);
-
+//   const [user,setUser]  = useState()
   useEffect(() => {
+    
     if (mapRef.current) {
       mapRef.current.setView([latitude, longitude], zoomLevel);
     }
   }, [latitude, longitude, zoomLevel]);
-
-  const customIcon = new L.Icon({
-    iconUrl: '/marker1.png',  // Remplacez par le chemin de votre icône personnalisée
-    iconSize: [38, 38],
-    iconAnchor: [19, 38],
-    popupAnchor: [0, -38],
-  });
 
   const handleZoomEnd = () => {
     if (mapRef.current) {
@@ -93,52 +88,48 @@ const Map: React.FC<MapProps> = ({ latitude, longitude, childname, photoUrl, las
     }
   };
 
+
+
+
+
   return (
     <StyledMapContainer 
       center={[latitude, longitude]} 
       zoom={zoomLevel} 
       ref={mapRef}
-      zoomControl={false}  // Désactive le contrôle de zoom par défaut
+      zoomControl={false}
       whenReady={(map) => {
         map.target.on('zoomend', handleZoomEnd);
       }}
     >
-      
       <CustomLayersControl position="topright">
         <LayersControl.BaseLayer checked name="OpenStreetMap">
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            attribution='&copy; OpenStreetMap contributors'
           />
         </LayersControl.BaseLayer>
         <LayersControl.BaseLayer name="Satellite">
           <TileLayer
             url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-            attribution='&copy; <a href="https://www.esri.com/en-us/home">Esri</a>'
+            attribution='&copy; Esri'
           />
         </LayersControl.BaseLayer>
         <LayersControl.Overlay checked name="Localisation de l'enfant">
           <FeatureGroup>
-            {/* <Marker position={[latitude, longitude]} icon={customIcon}>
+            <Marker position={[latitude, longitude]} icon={svgIcon}>
               <Tooltip permanent direction="top" offset={[0, -20]} opacity={1}>
                 <InfoWindow>
-                 <InfoText>Latitude: {latitude.toFixed(4)}</InfoText>
-
-                <ChildPhoto src={'assets/location/1.jpg'} alt={childname} />   
-                <InfoTitle>{childname}</InfoTitle>
+                  <ChildPhoto src={photoUrl} alt={childname} />
+                  <InfoTitle>{childname}</InfoTitle>
                   <InfoText>Latitude: {latitude.toFixed(4)}</InfoText>
                   <InfoText>Longitude: {longitude.toFixed(4)}</InfoText>
                   <InfoText>Dernière mise à jour: {lastupdateTime}</InfoText>
                   <InfoText>Zoom actuel: {zoomLevel}</InfoText>
-                  <InfoText>Neighborhood : {neighborhood }</InfoText>
+                  <InfoText>Neighborhood: {neighborhood}</InfoText>
                 </InfoWindow>
               </Tooltip>
-            </Marker> */}
-           <Marker
-           position={[latitude,longitude]}
-           icon={locationIcon}
-           >
-           </Marker>
+            </Marker>
           </FeatureGroup>
         </LayersControl.Overlay>
       </CustomLayersControl>

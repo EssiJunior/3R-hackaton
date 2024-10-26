@@ -29,6 +29,7 @@ class Auth {
         Axios.post('account/register/', formData)
             .then((response) => {
                 console.log(response.data)
+                localStorage.setItem('access',response.data.access)
             })
             .catch((error) => {
                 console.log(error)
@@ -41,6 +42,7 @@ class Auth {
         Axios.post('account/login', formData)
             .then((response) => {
                 console.log(response.data)
+                localStorage.setItem('access',response.data.access)
             })
             .catch((error) => {
                 console.log(error)

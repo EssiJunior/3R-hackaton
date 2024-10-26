@@ -5,8 +5,10 @@ import Link from "next/link"
 import { logoDark, logoLight } from '@/public/assets';
 import { socials } from "@/constants";
 import { PlaceholdersAndVanishInput } from "@/components/ui/VanishInput";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
+    const pathname = usePathname()
 
     const placeholders = [
         "Any question about 3R?",
@@ -25,6 +27,7 @@ const Footer = () => {
     return (
         <main
             className={`w-full z-50  border-t border-primary lg:bg-n-1 dark:lg:bg-n-8/90 lg:backdrop-blur-sm `}
+            style={pathname.search('/dashboard') !== -1?{display:'none'}:{}}
         >
             <section className="flex items-start justify-start flex-wrap [&>aside]:min-w-[200px] [&>aside]:h-full  [&>aside]:flex-1 [&>aside]:justify-start px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto py-12">
                 <aside className="">

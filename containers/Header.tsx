@@ -12,13 +12,13 @@ import { useHash } from '@/hooks/useHash';
 import { logoDark, logoLight } from '@/public/assets';
 import { Button } from "@/components/Button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-const Header = () => {
+const Header = ({ className }: { className?: string }) => {
     // const params = useParams();
     const [openNavigation, setOpenNavigation] = useState(false);
     const [theme, setTheme] = useState('dark');
-
+    const pathname = usePathname()
     const router = useRouter();
 
     const toggleNavigation = () => {
@@ -60,7 +60,8 @@ const Header = () => {
     return (
         <div
             className={`fixed top-0 left-0 w-full z-50  border-b border-primary lg:bg-n-1 dark:lg:bg-n-8/90 lg:backdrop-blur-sm ${openNavigation ? "bg-n-1 dark:bg-n-8" : "bg-n-1 dark:bg-n-8/90 backdrop-blur-sm"
-                }`}
+                } ${className}`}
+                style={pathname.search('/dashboard') !== -1?{display:'none'}:{}}
         >
             <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto">
                 <Link className="block w-[12rem] xl:mr-8 py-2" href="/">

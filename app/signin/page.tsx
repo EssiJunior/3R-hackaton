@@ -2,8 +2,40 @@
 
 import { useState, useEffect } from 'react'
 // import { useRouter } from 'next/navigation'
+import { useForm, SubmitHandler } from "react-hook-form"
+
+import Auth from '@/services/request/auth'
+
+type FormValues = {
+  username:string,
+  email:string,
+  password:string,
+  phone_number:string,
+}
+
+
+
+
 
 export default function AuthPage() {
+
+    const auhtentification = new Auth()
+    const { register, handleSubmit } = useForm<FormValues>()
+    const onSubmit: SubmitHandler<FormValues> = (data) => {
+        console.log(data)
+       if(activeForm==="signIn"){
+            auhtentification.login({formData:data})
+       }else{
+        auhtentification.register({formData:data})
+       }
+       
+    }
+      
+    
+    //   console.log(data)
+
+
+
   const [activeForm, setActiveForm] = useState('signIn')
 //   const router = useRouter()
 
@@ -27,6 +59,9 @@ export default function AuthPage() {
     `
     document.head.appendChild(style)
 
+
+
+
     return () => {
       document.head.removeChild(style)
     }
@@ -47,12 +82,12 @@ export default function AuthPage() {
     e.target.value = value
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formId = (e.target as HTMLFormElement).id
-    console.log('Formulaire soumis:', formId)
-    // Add logic to send data to the server here
-  }
+//   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+//     const formId = (e.target as HTMLFormElement).id
+//     console.log('Formulaire soumis:', formId)
+//     // Add logic to send data to the server here
+//   }
 
   return (
     <div className="bg-background text-foreground min-h-screen flex items-center justify-center">
@@ -81,17 +116,19 @@ export default function AuthPage() {
 
           {/* Formulaire de connexion */}
           {activeForm === 'signIn' && (
-            <form id="signInForm" className="space-y-4" onSubmit={handleSubmit}>
+            <form id="signInForm" className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-sm font-bold mb-2" htmlFor="signInEmail">Email</label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signInEmail" type="email" placeholder="Email" required />
+                <input {...register("email")} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signInEmail" type="email" placeholder="Email" required />
               </div>
               <div>
                 <label className="block text-sm font-bold mb-2" htmlFor="signInPassword">Mot de passe</label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="signInPassword" type="password" placeholder="Mot de passe" required />
+                <input {...register("password")} className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="signInPassword" type="password" placeholder="Mot de passe" required />
               </div>
               <div className="flex items-center justify-between">
-                <button className="bg-primary bg-blue text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button className="bg-primary bg-blue text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline" 
+                onClick={()=> onSubmit}
+                >
                   Se connecter
                 </button>
                 <a className="inline-block align-baseline font-bold text-sm text-primary hover:text-secondary" href="#" onClick={(e) => { e.preventDefault(); showForm('forgotPassword'); }}>
@@ -103,18 +140,18 @@ export default function AuthPage() {
 
           {/* Formulaire d'inscription */}
           {activeForm === 'signUp' && (
-            <form id="signUpForm" className="space-y-4" onSubmit={handleSubmit}>
+            <form id="signUpForm" className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-sm font-bold mb-2" htmlFor="signUpName">Nom complet</label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpName" type="text" placeholder="Nom complet" required />
+                <input {...register('username')} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpName" type="text" placeholder="Nom complet" required />
               </div>
               <div>
                 <label className="block text-sm font-bold mb-2" htmlFor="signUpEmail">Email</label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpEmail" type="email" placeholder="Email" required />
+                <input {...register('email')} className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpEmail" type="email" placeholder="Email" required />
               </div>
               <div>
-                <label className="block text-sm font-bold mb-2" htmlFor="signUpPhone">Téléphone</label>
-                <input 
+                <label  className="block text-sm font-bold mb-2" htmlFor="signUpPhone">Téléphone</label>
+                <input {...register("phone_number")}
                   className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" 
                   id="signUpPhone" 
                   type="tel" 
@@ -127,10 +164,12 @@ export default function AuthPage() {
               </div>
               <div>
                 <label className="block text-sm font-bold mb-2" htmlFor="signUpPassword">Mot de passe</label>
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpPassword" type="password" placeholder="Mot de passe" required />
+                <input {...register('password')} className="shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpPassword" type="password" placeholder="Mot de passe" required />
               </div>
               <div>
-                <button className="bg-primary hover:bg-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
+                <button className="bg-primary hover:bg-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" 
+                onClick={()=>onsubmit}
+                >
                   Sinscrire
                 </button>
               </div>
@@ -139,7 +178,7 @@ export default function AuthPage() {
 
           {/* Formulaire de récupération de mot de passe */}
           {activeForm === 'forgotPassword' && (
-            <form id="forgotPasswordForm" className="space-y-4" onSubmit={handleSubmit}>
+            <form id="forgotPasswordForm" className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-sm font-bold mb-2" htmlFor="forgotPasswordEmail">Email</label>
                 <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="forgotPasswordEmail" type="email" placeholder="Email" required />

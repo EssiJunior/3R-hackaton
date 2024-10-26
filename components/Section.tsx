@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SectionSvg from "@/public/assets/images/svg/SectionSvg";
 
 const Section = ({

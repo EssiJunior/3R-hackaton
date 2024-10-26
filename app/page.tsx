@@ -2,7 +2,8 @@
 import Contact from "@/containers/Contact";
 import Hero from "@/containers/Hero";
 import Info from "@/containers/Info";
-import Sponsors from "@/containers/Sponsors";
+import Services from "@/containers/Services";
+import Sponsors from "@/components/Sponsors";
 
 export default function Home() {  
   return (
@@ -10,7 +11,8 @@ export default function Home() {
       <div className="max-w-7xl w-full">
         <Hero />
         <Info />
-        <Sponsors />
+        <Sponsors className="mt-20"/>
+        <Services />
         <Contact />
       </div>
     </main>

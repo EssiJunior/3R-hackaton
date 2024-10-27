@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useState } from 'react'
@@ -25,7 +26,6 @@ import {
   Menu as MenuIcon,
   X,
   Loader,
-  User2,
   UserCircle2
 } from 'lucide-react'
 import DashboardLayout from './layout'
@@ -42,14 +42,14 @@ const data = [
 export default function DashboardPage() {
   const [showAddAgentModal, setShowAddAgentModal] = useState(false)
   const [showEditAgentModal, setShowEditAgentModal] = useState(false)
-  const [agents, setAgents] = useState([
+  const [agents, setAgents] = useState<any>([
     { id: 1, name: 'Jean Dupont', role: 'Collecteur', performance: 85 },
     { id: 2, name: 'Marie Curie', role: 'Trieur', performance: 92 },
     { id: 3, name: 'Pierre Martin', role: 'Chauffeur', performance: 78 },
   ])
   const [newAgent, setNewAgent] = useState({ name: '', role: '', performance: 0 })
-  const [editingAgent, setEditingAgent] = useState(null)
-  const [deletingAgentId, setDeletingAgentId] = useState(null)
+  const [editingAgent, setEditingAgent] = useState<any>(null)
+  const [deletingAgentId, setDeletingAgentId] = useState<any>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('dashboard')
 
@@ -60,23 +60,23 @@ export default function DashboardPage() {
     setShowAddAgentModal(false)
   }
 
-  const handleEditAgent = (agent) => {
+  const handleEditAgent = (agent: React.SetStateAction<null>) => {
     setEditingAgent(agent)
     setShowEditAgentModal(true)
   }
 
   const handleUpdateAgent = (e: React.FormEvent) => {
     e.preventDefault()
-    setAgents(agents.map(agent => agent.id === editingAgent.id ? editingAgent : agent))
+    setAgents(agents.map((agent: { id: any }) => agent.id === editingAgent.id ? editingAgent : agent))
     setShowEditAgentModal(false)
     setEditingAgent(null)
   }
 
-  const handleDeleteAgent = async (id) => {
+  const handleDeleteAgent = async (id: number | React.SetStateAction<null>) => {
     setDeletingAgentId(id)
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
-    setAgents(agents.filter(agent => agent.id !== id))
+    setAgents(agents.filter((agent: { id: number | React.SetStateAction<null> }) => agent.id !== id))
     setDeletingAgentId(null)
   }
 
@@ -167,7 +167,7 @@ export default function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {agents.map((agent) => (
+                    {agents.map((agent: React.SetStateAction<null>) => (
                       <tr key={agent.id}>
                         <td className="px-6 py-4 whitespace-nowrap">{agent.name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{agent.role}</td>

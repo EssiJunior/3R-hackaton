@@ -162,7 +162,12 @@ const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) 
 
   const renderMap = () => (
     <div className="h-[400px] w-full rounded-lg overflow-hidden">
-      <MapContainer center={[3.848, 11.502]} zoom={12} style={{ height: '100%', width: '100%' }}>
+      <MapContainer center={[3.848, 11.502]} zoom={12} style={{ height: '100%', width: '100%' }} 
+      
+      scrollWheelZoom= {false}
+      doubleClickZoom= {false}
+     
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -1,34 +1,36 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
+import { useRouter } from 'next/navigation';
 import { useState, useEffect, SetStateAction } from 'react'
 // import { useRouter } from 'next/navigation'
-import { useForm, SubmitHandler } from "react-hook-form"
+// import {  SubmitHandler } from "react-hook-form"
 
-import Auth from '@/services/request/auth'
+// import Auth from '@/services/request/auth'
 
-type FormValues = {
-  username: string,
-  email: string,
-  password: string,
-  lacation_color: string,
-  phone_number: string,
-}
+// type FormValues = {
+//   username: string,
+//   email: string,
+//   password: string,
+//   lacation_color: string,
+//   phone_number: string,
+// }
 
 export default function AuthPage() {
-
-  const auhtentification = new Auth()
+  const router = useRouter()
+  // const auhtentification = new Auth()
   // const { register, handleSubmit } = useForm<FormValues>()
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    data['lacation_color'] = `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
-    console.log(data)
-    if (activeForm === "signIn") {
-      auhtentification.login({ formData: data })
-    } else {
-      auhtentification.register({ formData: data })
-    }
+  // const onSubmit: SubmitHandler<FormValues> = (data) => {
+  //   data['lacation_color'] = `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
+  //   console.log(data)
+  //   if (activeForm === "signIn") {
+  //     auhtentification.login({ formData: data })
+  //   } else {
+  //     auhtentification.register({ formData: data })
+  //   }
 
-  }
+  // }
 
 
   //   console.log(data)
@@ -80,11 +82,11 @@ export default function AuthPage() {
     e.target.value = value;
   };
 
-  const handleSubmit = (e: { preventDefault: () => void; target: { id: any } }) => {
-    e.preventDefault();
-    const formId = e.target.id;
-    console.log('Formulaire soumis:', formId);
-  };
+  // const handleSubmit = (e: { preventDefault: () => void; target: { id: any } }) => {
+  //   e.preventDefault();
+  //   const formId = e.target.id;
+  //   console.log('Formulaire soumis:', formId);
+  // };
 
   return (
     <div className="text-foreground min-h-screen flex flex-col lg:flex-row mt-24">
@@ -114,7 +116,7 @@ export default function AuthPage() {
 
             {/* Sign In Form */}
             {activeForm === 'signIn' && (
-              <form id="signInForm" className="space-y-4 text-black dark:text-white" onSubmit={handleSubmit}>
+              <form id="signInForm" className="space-y-4 text-black dark:text-white" onSubmit={() => router.push('/pricing')}>
                 <div>
                   <label className="block text-sm font-bold mb-2 " htmlFor="signInEmail">Email</label>
                   <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signInEmail" type="email" placeholder="Email" required />
@@ -136,7 +138,7 @@ export default function AuthPage() {
 
             {/* Sign Up Form */}
             {activeForm === 'signUp' && (
-              <form id="signUpForm" className="space-y-4 text-black dark:text-white" onSubmit={handleSubmit}>
+              <form id="signUpForm" className="space-y-4 text-black dark:text-white" onSubmit={() => router.push('/pricing')}>
                 <div>
                   <label className="block text-sm font-bold mb-2" htmlFor="signUpName">Nom complet</label>
                   <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="signUpName" type="text" placeholder="Nom complet" required />
@@ -184,7 +186,7 @@ export default function AuthPage() {
 
             {/* Forgot Password Form */}
             {activeForm === 'forgotPassword' && (
-              <form id="forgotPasswordForm" className="space-y-4 text-black dark:text-white" onSubmit={handleSubmit}>
+              <form id="forgotPasswordForm" className="space-y-4 text-black dark:text-white" onSubmit={() => router.push('/pricing')}>
                 <div>
                   <label className="block text-sm font-bold mb-2" htmlFor="forgotPasswordEmail">Email</label>
                   <input className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" id="forgotPasswordEmail" type="email" placeholder="Email" required />

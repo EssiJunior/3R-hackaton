@@ -23,7 +23,7 @@ const AgentDashboard = () => {
   const [sortingScore, setSortingScore] = useState(5)
 
   // Mock data for subscribed houses and route
-  const subscribedHouses = [
+  const subscribedHouses: { id: number; position: number[]; address: string; }[] = [
     { id: 1, position: [3.848, 11.502], address: "123 Rue de la Paix" },
     { id: 2, position: [3.850, 11.505], address: "456 Avenue des Fleurs" },
     { id: 3, position: [3.852, 11.508], address: "789 Boulevard du Soleil" },
@@ -35,7 +35,7 @@ const AgentDashboard = () => {
     [3.852, 11.508],
   ]
 
-  const handleHouseClick = (house: React.SetStateAction<null>) => {
+  const handleHouseClick = (house: { id: number; position: number[]; address: string; }) => {
     setSelectedHouse(house)
     setShowCollectionModal(true)
   }
@@ -58,7 +58,7 @@ const AgentDashboard = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {subscribedHouses.map(house => (
+        {subscribedHouses.map((house:{ id: number; position: number[]; address: string; }) => (
           <Marker
             key={house.id}
             position={house.position}

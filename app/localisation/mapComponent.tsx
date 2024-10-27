@@ -35,13 +35,13 @@ const InfoWindow = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-const ChildPhoto = styled.img`
-  width: 65%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
+// const ChildPhoto = styled.img`
+//   width: 65%;
+//   height: auto;
+//   border-radius: 12px;
+//   margin-bottom: 12px;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+// `;
 
 const InfoTitle = styled.h3`
   margin: 0 0 8px 0;
@@ -101,7 +101,7 @@ const Map: React.FC<{ companies: Company[] }> = ({ companies }) => {
       zoom={zoomLevel} 
       ref={mapRef}
       zoomControl={false}
-      whenReady={(map) => {
+      whenReady={(map: { target: { on: (arg0: string, arg1: () => void) => void; }; }) => {
         map.target.on('zoomend', handleZoomEnd);
       }}
     >

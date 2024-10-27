@@ -66,8 +66,8 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen text-gray-800 p-8">
-      <div className="max-w-6xl mx-auto mt-32">
+    <div className="min-h-screen text-gray-800 p-8  max-w-7xl mx-auto">
+      <div className="mt-32">
 
         <Heading
           tag="ABOUT US"

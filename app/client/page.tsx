@@ -192,7 +192,7 @@ const ClientDashboard = () => {
     switch (activeTab) {
       case 'map':
         return (
-          <div className='text-black dark:text-white'>
+          <div className='text-black dark:text-white  max-w-7xl'>
             <h2 className="text-2xl font-bold mb-4">Carte des entreprises de recyclage</h2>
             {renderMap()}
             {/* <MapClient/> */}

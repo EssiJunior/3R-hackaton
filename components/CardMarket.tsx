@@ -13,7 +13,7 @@ type props_card = {
 
 export default function CardMarket({ name, image, price }: props_card) {
     return (
-        <div className='hover:scale-105 ease-in-out duration-200'>
+        <div className='hover:scale-105 ease-in-out duration-200 flex-1 min-w-[250px]'>
 
             <div className="w-full max-w-sm bg-n-2/40 border border-gray-200 rounded-lg shadow dark:bg-n-8/90 dark:border-gray-700">
                 <a href="#">

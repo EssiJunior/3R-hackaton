@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useState } from 'react'
@@ -16,7 +17,7 @@ L.Icon.Default.mergeOptions({
 
 const AgentDashboard = () => {
   const [activeTab, setActiveTab] = useState('map')
-  const [selectedHouse, setSelectedHouse] = useState(null)
+  const [selectedHouse, setSelectedHouse] = useState<any>(null)
   const [collectedHouses, setCollectedHouses] = useState([])
   const [showCollectionModal, setShowCollectionModal] = useState(false)
   const [sortingScore, setSortingScore] = useState(5)
@@ -34,7 +35,7 @@ const AgentDashboard = () => {
     [3.852, 11.508],
   ]
 
-  const handleHouseClick = (house) => {
+  const handleHouseClick = (house: React.SetStateAction<null>) => {
     setSelectedHouse(house)
     setShowCollectionModal(true)
   }
@@ -116,7 +117,7 @@ const AgentDashboard = () => {
       case 'profile':
         return (
           <div>
-            <h2 className="text-2xl font-bold mb-4">Profil de l'agent</h2>
+            <h2 className="text-2xl font-bold mb-4">Profil de l&#39;agent</h2>
             <div className="bg-white dark:bg-gray-800 p-4 rounded shadow">
               <img src="/placeholder.svg" alt="Agent" className="w-32 h-32 rounded-full mx-auto mb-4" />
               <h3 className="text-xl font-bold text-center mb-2">Jean Dupont</h3>

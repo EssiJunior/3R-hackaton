@@ -1,13 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useState } from 'react'
-import { MapPin, Calendar, Bell, ShoppingBag, CreditCard, Map } from 'lucide-react'
+import { Calendar, Bell, ShoppingBag, CreditCard, Map } from 'lucide-react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-import MapClient from '../location/mapClient/page'
 import Modal from '@/components/CofirmModal'
-import { usePathname } from 'next/navigation'
 
 // Fix for default marker icon in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -19,43 +18,43 @@ L.Icon.Default.mergeOptions({
 
 
 
-const companies = [
-  {
-    latitude: 3.8862848,
-    longitude: 11.5081216,
-    photoUrl: 'url_to_photo1',
-    name: 'Entreprise 1',
-    lastUpdateTime: '2024-10-26',
-    neighborhood: 'Quartier 1',
-    color: '#3498db', // Couleur de l'icône
-  },
-  {
+// const companies = [
+//   {
+//     latitude: 3.8862848,
+//     longitude: 11.5081216,
+//     photoUrl: 'url_to_photo1',
+//     name: 'Entreprise 1',
+//     lastUpdateTime: '2024-10-26',
+//     neighborhood: 'Quartier 1',
+//     color: '#3498db', // Couleur de l'icône
+//   },
+//   {
 
-    // 3.8862848
-    // 11.5081216
-    latitude: 4.9,
-    longitude: 11.9585,
-    photoUrl: 'url_to_photo2',
-    name: 'Entreprise 2',
-    lastUpdateTime: '2024-10-26',
-    neighborhood: 'Quartier 2',
-    color: '#e74c3c', // Couleur de l'icône
-  },
+//     // 3.8862848
+//     // 11.5081216
+//     latitude: 4.9,
+//     longitude: 11.9585,
+//     photoUrl: 'url_to_photo2',
+//     name: 'Entreprise 2',
+//     lastUpdateTime: '2024-10-26',
+//     neighborhood: 'Quartier 2',
+//     color: '#e74c3c', // Couleur de l'icône
+//   },
 
-  {
+//   {
 
-    // 3.8862848
-    // 11.5081216
-    latitude: 3.8575,
-    longitude: 12.5,
-    photoUrl: 'url_to_photo2',
-    name: 'Entreprise 3',
-    lastUpdateTime: '2024-10-26',
-    neighborhood: 'bonas , cradat',
-    color: 'green', // Couleur de l'icône
-  },
-  // Ajoutez d'autres entreprises...
-];
+//     // 3.8862848
+//     // 11.5081216
+//     latitude: 3.8575,
+//     longitude: 12.5,
+//     photoUrl: 'url_to_photo2',
+//     name: 'Entreprise 3',
+//     lastUpdateTime: '2024-10-26',
+//     neighborhood: 'bonas , cradat',
+//     color: 'green', // Couleur de l'icône
+//   },
+//   // Ajoutez d'autres entreprises...
+// ];
 
 
 const ClientDashboard = () => {
@@ -66,7 +65,7 @@ const ClientDashboard = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState('');
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: { target: { files: any[] } }) => {
     const file = event.target.files[0];
     if (file) {
       setSelectedFile(file);
@@ -74,7 +73,7 @@ const ClientDashboard = () => {
     }
   };
 
-  const handleUpload = async (event) => {
+  const handleUpload = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (!selectedFile) return;
 
@@ -127,16 +126,16 @@ const ClientDashboard = () => {
     }
   ]
 
-  const handleCompanyClick = (company) => {
+  const handleCompanyClick = (company: React.SetStateAction<null>) => {
     setSelectedCompany(company)
   }
 
-  const handleSubscribe = () => {
-    if (selectedCompany) {
-      alert(`Vous êtes maintenant abonné à ${selectedCompany.name}`)
-      setUserPoints(prevPoints => prevPoints + 10)
-    }
-  }
+  // const handleSubscribe = () => {
+  //   if (selectedCompany) {
+  //     alert(`Vous êtes maintenant abonné à ${selectedCompany.name}`)
+  //     setUserPoints(prevPoints => prevPoints + 10)
+  //   }
+  // }
 
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -226,7 +225,7 @@ const ClientDashboard = () => {
               <div>
                 <h3 className="text-xl font-bold mb-2 text-black dark:text-white">{selectedCompany.name}</h3>
                 <ul>
-                  {selectedCompany.schedule.map((day, index) => (
+                  {selectedCompany.schedule.map((day: string | number | bigint | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<React.AwaitedReactNode> | null | undefined, index: React.Key | null | undefined) => (
                     <li key={index} className="mb-2">{day}</li>
                   ))}
                 </ul>

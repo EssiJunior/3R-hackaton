@@ -1,8 +1,6 @@
 
-import { smallSphere, stars } from "@/public/assets";
 import Heading from "@/components/Heading";
 import { LeftLine, RightLine } from "@/components/atoms/Pricing";
-import Image from "next/image";
 import PricingList from "@/components/PricingList";
 
 const pages = () => {

@@ -3,15 +3,12 @@
 import Heading from '@/components/Heading'
 import { AnimatedTooltip } from '@/components/ui/AnimatedToolTip'
 import { HoverEffect } from '@/components/ui/CardHover'
-import { arthur, bevanie, essi, logoDark, logoLight, romaka, yves } from '@/public/assets'
+import { arthur, bevanie, essi, logoLight, romaka, yves } from '@/public/assets'
 import Image from 'next/image'
 import Link from 'next/link'
 // import Link from 'next/link'
-import { useState } from 'react'
 
 export default function AboutPage() {
-  const [activeService, setActiveService] = useState('tutorials')
-
   const services = [
     {
       icon: '📰',
@@ -89,7 +86,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="ml-24 bg-n-2/30 dark:bg-n-8/90 px-32 py-16 rounded-lg flex-1">
-            <h2 className="text-2xl font-bold text-primary mb-4 text-black dark:text-white">WE ARE "LES GARDIENS DE LA FORET"</h2>
+            <h2 className="text-2xl font-bold text-primary mb-4 text-black dark:text-white">WE ARE &rdquo;LES GARDIENS DE LA FORET&rdquo;</h2>
             <p className="mb-1 text-black dark:text-white">
               An important issue is face in Cameroon for already a wile. The problem is the correct use of plastic materials. 
             </p>

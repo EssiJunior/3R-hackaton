@@ -59,7 +59,7 @@ L.Icon.Default.mergeOptions({
 
 const ClientDashboard = () => {
   const [activeTab, setActiveTab] = useState('map')
-  const [selectedCompany, setSelectedCompany] = useState(null)
+  const [selectedCompany, setSelectedCompany] = useState<any>(null)
   const [userPoints, setUserPoints] = useState(100)
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -211,7 +211,7 @@ const ClientDashboard = () => {
                   onClick={() => setModalOpen(true)}
                   className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
                 >
-                  S'abonner
+                  S&apos;abonner
                 </button>
               </div>
             )}
@@ -238,7 +238,7 @@ const ClientDashboard = () => {
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={handleFileChange}
+                      onChange={() =>handleFileChange}
                       className="mb-4 overflow-hidden"
                     />
 

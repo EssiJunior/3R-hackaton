@@ -1,3 +1,4 @@
+import Heading from '@/components/Heading';
 import { LinkPreview } from '@/components/ui/LinkPreview';
 import { Timeline } from '@/components/ui/Timeline';
 import Image from 'next/image';
@@ -43,7 +44,7 @@ const page = () => {
                     <LinkPreview
                         url="https://www.france24.com/fr/%C3%A9missions/focus/20221027-cameroun-les-start-up-s-attaquent-au-recyclage-des-d%C3%A9chets-plastiques"
                         className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
-                        
+
                     >
                         Read full article...
                     </LinkPreview>
@@ -72,7 +73,7 @@ const page = () => {
                     <LinkPreview
                         url="https://enactafrica.org/enact-observer/le-plastique-de-contrebande-saccage-lenvironnement-au-cameroun#:~:text=En%20septembre%202020%2C%20800%20kg,dans%20la%20r%C3%A9gion%20du%20Nord."
                         className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
-                        
+
                     >
                         Read full article...
                     </LinkPreview>
@@ -108,7 +109,7 @@ const page = () => {
                     <LinkPreview
                         url="https://ipen.org/sites/default/files/documents/country_situation_report_plastic_-_cameroon_afepb_-_ok98.pdf"
                         className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
-                        
+
                     >
                         Read full article...
                     </LinkPreview>
@@ -137,7 +138,7 @@ const page = () => {
                     <LinkPreview
                         url="https://enactafrica.org/enact-observer/le-plastique-de-contrebande-saccage-lenvironnement-au-cameroun#:~:text=En%20septembre%202020%2C%20800%20kg,dans%20la%20r%C3%A9gion%20du%20Nord."
                         className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
-                        
+
                     >
                         Read full article...
                     </LinkPreview>
@@ -148,6 +149,10 @@ const page = () => {
             title: "UNEP",
             content: (
                 <div>
+                    <Heading
+                        tag="Information"
+                        title="We will never stop saying that plastic product causes pollution, here are proven catastrophes of its consequences."
+                    />
                     <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
                         Comment le secteur du tourisme peut-il se libérer du plastique ?
                     </p>
@@ -166,7 +171,7 @@ const page = () => {
                     <LinkPreview
                         url="https://enactafrica.org/enact-observer/le-plastique-de-contrebande-saccage-lenvironnement-au-cameroun#:~:text=En%20septembre%202020%2C%20800%20kg,dans%20la%20r%C3%A9gion%20du%20Nord."
                         className="font-bold bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 text-secondary dark:text-primary"
-                        
+
                     >
                         Read full article...
                     </LinkPreview>
@@ -179,7 +184,7 @@ const page = () => {
         <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
             <div className="mt-32 bg-n-2/30 dark:bg-n-8/90  max-w-7xl w-full">
                 <main className=" pb-10">
-                    <Timeline data={data} isInfoPage/>
+                    <Timeline data={data} isInfoPage />
                 </main>
             </div>
         </main>

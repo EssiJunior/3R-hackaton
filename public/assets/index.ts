@@ -20,6 +20,9 @@ const bevanie = "/assets/images/team/bevanie.jpeg";
 const yves = "/assets/images/team/yves.jpeg";
 const essi = "/assets/images/team/essi.jpeg";
 
+const mtn = "/assets/images/payment/mtn.png";
+const orange = "/assets/images/payment/orange.png";
+
 export {
   logoLight,
   logoDark,
@@ -37,4 +40,6 @@ export {
   bevanie,
   yves,
   essi,
+  mtn,
+  orange
 };

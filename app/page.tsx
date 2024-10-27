@@ -1,7 +1,6 @@
 'use client'
 
 // import { PinContainer } from "@/components/ui/3DPin";
-import Contact from "@/containers/Contact";
 import Hero from "@/containers/Hero";
 import Info from "@/containers/Info";
 import Services from "@/containers/Services";

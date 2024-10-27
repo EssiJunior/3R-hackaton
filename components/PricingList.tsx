@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import Image from "next/image";
@@ -12,7 +13,6 @@ import { mtn, orange } from "@/public/assets";
 import { useState } from "react";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { set } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 const PricingList = () => {

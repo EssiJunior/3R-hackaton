@@ -1,10 +1,10 @@
 'use client';
 
-import Map from '@/app/localisation/mapComponent';
+import Map from '@/app/location/mapClient/MapClient';
 import { useEffect, useState } from 'react';
 import image from '@/public/assets/location/1.jpg'
 
-const HomePage = () => {
+const MapClient = () => {
 
   
 
@@ -22,14 +22,27 @@ const companies = [
 
 // 3.8862848
 // 11.5081216
-    latitude: 3.8575,
-    longitude: 11.3585,
+    latitude: 4.9,
+    longitude: 11.9585,
     photoUrl: 'url_to_photo2',
     name: 'Entreprise 2',
     lastUpdateTime: '2024-10-26',
     neighborhood: 'Quartier 2',
     color: '#e74c3c', // Couleur de l'icône
   },
+
+  {
+
+    // 3.8862848
+    // 11.5081216
+        latitude: 3.8575,
+        longitude: 12.5,
+        photoUrl: 'url_to_photo2',
+        name: 'Entreprise 3',
+        lastUpdateTime: '2024-10-26',
+        neighborhood: 'bonas , cradat',
+        color: 'green', // Couleur de l'icône
+      },
   // Ajoutez d'autres entreprises...
 ];
 
@@ -84,4 +97,4 @@ const companies = [
   );
 };
 
-export default HomePage;
+export default MapClient;

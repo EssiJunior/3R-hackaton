@@ -6,32 +6,23 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import styled from 'styled-components';
 
-interface Household {
+interface Company {
   latitude: number;
   longitude: number;
-  color: string;
   photoUrl: string;
-  childname: string;
-  lastupdateTime: string;
+  name: string;
+  lastUpdateTime: string;
   neighborhood: string;
-}
-
-interface Agent {
-  latitude: number;
-  longitude: number;
-}
-
-interface MapProps {
-  agent: Agent;
-  households: Household[];
+  color: string; // Couleur pour l'icône
 }
 
 const StyledMapContainer = styled(MapContainer)`
-  height: 600px;
+  height: 400px; /* Taille moyenne ajustée */
   width: 100%;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   overflow: hidden;
+  margin:100px
 `;
 
 const InfoWindow = styled.div`
@@ -68,22 +59,30 @@ const InfoText = styled.p`
 
 const CustomLayersControl = styled(LayersControl)`
   .leaflet-control-layers-toggle {
+
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 
-const Map: React.FC<MapProps> = ({ agent, households }) => {
+const createIcon = (color: string) => {
+  return new L.DivIcon({
+    className: 'custom-icon',
+    html: `<svg fill="${color}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/></svg>`,
+  });
+};
+
+const Map: React.FC<{ companies: Company[] }> = ({ companies }) => {
   const mapRef = useRef<L.Map | null>(null);
   const [zoomLevel, setZoomLevel] = useState(13);
-  const [activeHouseholdIndex, setActiveHouseholdIndex] = useState<number | null>(null);
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null); // État pour l'entreprise sélectionnée
 
   useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.setView([agent.latitude, agent.longitude], zoomLevel);
+    if (companies.length > 0 && mapRef.current) {
+      mapRef.current.setView([companies[0].latitude, companies[0].longitude], zoomLevel);
     }
-  }, [agent, zoomLevel]);
+  }, [companies, zoomLevel]);
 
   const handleZoomEnd = () => {
     if (mapRef.current) {
@@ -91,60 +90,47 @@ const Map: React.FC<MapProps> = ({ agent, households }) => {
     }
   };
 
+  const handleMarkerClick = (company: Company) => {
+    setSelectedCompany(company); // Met à jour l'entreprise sélectionnée
+  };
+
   return (
-    <StyledMapContainer
-      center={[agent.latitude, agent.longitude]}
-      zoom={zoomLevel}
+    <StyledMapContainer 
+    
+      center={[companies[0].latitude, companies[0].longitude]} 
+      zoom={zoomLevel} 
       ref={mapRef}
       zoomControl={false}
       whenReady={(map) => {
         map.target.on('zoomend', handleZoomEnd);
       }}
     >
-      <CustomLayersControl position="topright">
+      <CustomLayersControl position="topright" >
         <LayersControl.BaseLayer checked name="OpenStreetMap">
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; OpenStreetMap contributors' />
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; OpenStreetMap contributors'
+          />
         </LayersControl.BaseLayer>
         <LayersControl.BaseLayer name="Satellite">
-          <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" attribution='&copy; Esri' />
+          <TileLayer
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution='&copy; Esri'
+          />
         </LayersControl.BaseLayer>
-        <LayersControl.Overlay checked name="Localisation de l'agent">
+        <LayersControl.Overlay checked name="Localisation des entreprises">
           <FeatureGroup>
-            <Marker position={[agent.latitude, agent.longitude]} icon={new L.DivIcon({ className: 'agent-icon', html: '<div style="background-color: #f39c12; border-radius: 50%; width: 20px; height: 20px;"></div>' })}>
-              <Tooltip permanent direction="top" offset={[0, -20]} opacity={1}>
-                <InfoText>Agent en cours de déplacement</InfoText>
-              </Tooltip>
-            </Marker>
-            {households.map((household, index) => (
-              <Marker
-                key={index}
-                position={[household.latitude, household.longitude]}
-                icon={new L.DivIcon({
-                  className: 'household-icon',
-                  html: `<div style="background-color: ${household.color}; border-radius: 50%; width: 20px; height: 20px;"></div>`
-                })}
+            {companies.map((company, index) => (
+              <Marker 
+                key={index} 
+                position={[company.latitude, company.longitude]} 
+                icon={createIcon(company.color)} 
                 eventHandlers={{
-                  click: () => {
-                    setActiveHouseholdIndex(activeHouseholdIndex === index ? null : index);
-                  },
+                  click: () => handleMarkerClick(company), 
                 }}
               >
-                <Tooltip 
-                  permanent={activeHouseholdIndex === index}
-                  direction="top" 
-                  offset={[0, -20]} 
-                  opacity={1}
-                >
-                  {activeHouseholdIndex === index && (
-                    <InfoWindow>
-                      <ChildPhoto src={household.photoUrl} alt={household.childname} />
-                      <InfoTitle>{household.childname}</InfoTitle>
-                      <InfoText>Latitude: {household.latitude.toFixed(4)}</InfoText>
-                      <InfoText>Longitude: {household.longitude.toFixed(4)}</InfoText>
-                      <InfoText>Dernière mise à jour: {household.lastupdateTime}</InfoText>
-                      <InfoText>Neighborhood: {household.neighborhood}</InfoText>
-                    </InfoWindow>
-                  )}
+                <Tooltip permanent direction="top" offset={[0, -20]} opacity={1}>
+                  <InfoTitle>{company.name}</InfoTitle>
                 </Tooltip>
               </Marker>
             ))}
@@ -152,6 +138,16 @@ const Map: React.FC<MapProps> = ({ agent, households }) => {
         </LayersControl.Overlay>
       </CustomLayersControl>
       <ZoomControl position="bottomright" />
+
+      {/* Afficher les détails de l'entreprise sélectionnée */}
+      {selectedCompany && (
+        <InfoWindow style={{ position: 'absolute', bottom: '10%', left: '10%', zIndex: 1000 }}>
+          <InfoTitle>{selectedCompany.name}</InfoTitle>
+          <InfoText>Dernière mise à jour: {selectedCompany.lastUpdateTime}</InfoText>
+          <InfoText>Neighborhood: {selectedCompany.neighborhood}</InfoText>
+          <button className='m-5 text-sm text-red-500' onClick={() => setSelectedCompany(null)}>Fermer</button>
+        </InfoWindow>
+      )}
     </StyledMapContainer>
   );
 };

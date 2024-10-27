@@ -15,7 +15,6 @@ export default function Home() {
         <Info />
         <Sponsors className="mt-20"/>
         <Services />
-        <Contact />
       </div>
     </main>
   );

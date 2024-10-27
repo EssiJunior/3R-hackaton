@@ -13,7 +13,7 @@ interface Company {
   name: string;
   lastUpdateTime: string;
   neighborhood: string;
-  color: string; 
+  color: string; // Couleur pour l'icône
 }
 
 const StyledMapContainer = styled(MapContainer)`
@@ -76,7 +76,7 @@ const createIcon = (color: string) => {
 const Map: React.FC<{ companies: Company[] }> = ({ companies }) => {
   const mapRef = useRef<L.Map | null>(null);
   const [zoomLevel, setZoomLevel] = useState(13);
-  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null); 
+  const [selectedCompany, setSelectedCompany] = useState<Company | null>(null); // État pour l'entreprise sélectionnée
 
   useEffect(() => {
     if (companies.length > 0 && mapRef.current) {
@@ -91,7 +91,7 @@ const Map: React.FC<{ companies: Company[] }> = ({ companies }) => {
   };
 
   const handleMarkerClick = (company: Company) => {
-    setSelectedCompany(company); 
+    setSelectedCompany(company); // Met à jour l'entreprise sélectionnée
   };
 
   return (

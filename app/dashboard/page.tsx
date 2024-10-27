@@ -24,7 +24,9 @@ import {
   Settings,
   Menu as MenuIcon,
   X,
-  Loader
+  Loader,
+  User2,
+  UserCircle2
 } from 'lucide-react'
 import DashboardLayout from './layout'
 
@@ -279,7 +281,7 @@ export default function DashboardPage() {
             </button>
             <div className="relative">
               <button className="flex items-center space-x-2 text-gray-600 hover:text-gray-800">
-                <img src="/placeholder.svg" alt="Profile" className="w-8 h-8 rounded-full" />
+                <UserCircle2 />
                 <span className="hidden md:inline">Ariel fossi</span>
                 <ChevronDown size={16} />
               </button>

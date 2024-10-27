@@ -38,10 +38,15 @@ const nextConfig: NextConfig = {
         hostname: "img.freepik.com",
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: "api.microlink.io",
+        port: '',
+      },
     ],
-    domains: [
-      "api.microlink.io", // Microlink Image Preview
-    ],
+    // domains: [
+    //   "api.microlink.io", // Microlink Image Preview
+    // ],
   },
 };
 

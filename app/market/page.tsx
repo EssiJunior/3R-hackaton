@@ -5,7 +5,7 @@ import Heading from '@/components/Heading'
 
 export default function page() {
   return (
-    <div className='text-black dark:text-white py-32  max-w-7xl mx-auto'>
+    <div className='text-black dark:text-white py-32 lg:w-5/6  max-w-7xl mx-auto'>
       <Heading
         tag="Marketplace"
         title="Browse here all the recycled plastic product made by our partners"

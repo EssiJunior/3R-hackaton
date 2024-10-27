@@ -65,23 +65,4 @@ const companies = [
     }
   }, []);
 
-  const latitude = position.latitude !== null ? position.latitude : 52.5200066; // Valeur par défaut
-  const longitude = position.longitude !== null ? position.longitude : 13.404954; // Valeur par défaut
-
-  const getNeighborhood = async (latitude, longitude) => {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
-    const response = await fetch(url);
-    const data = await response.json();
-    return data?.address?.neighbourhood || data?.address?.suburb || 'Quartier inconnu';
-  };
-
-  return (
-    <div>
-      <h1>Localisation sur la carte</h1>
-      {error && <p style={{ color: 'red' }}>Erreur : {error}</p>}
-    <Map companies={companies} />
-    </div>
-  );
-};
-
 export default HomePage;

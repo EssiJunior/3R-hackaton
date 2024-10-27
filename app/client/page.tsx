@@ -5,6 +5,9 @@ import { MapPin, Calendar, Bell, ShoppingBag, CreditCard, Map } from 'lucide-rea
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+import MapClient from '../location/mapClient/page'
+import Modal from '@/components/CofirmModal'
+import { usePathname } from 'next/navigation'
 
 // Fix for default marker icon in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -14,15 +17,108 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-shadow.png',
 });
 
+
+
+const companies = [
+  {
+    latitude: 3.8862848,
+    longitude: 11.5081216,
+    photoUrl: 'url_to_photo1',
+    name: 'Entreprise 1',
+    lastUpdateTime: '2024-10-26',
+    neighborhood: 'Quartier 1',
+    color: '#3498db', // Couleur de l'icône
+  },
+  {
+
+// 3.8862848
+// 11.5081216
+    latitude: 4.9,
+    longitude: 11.9585,
+    photoUrl: 'url_to_photo2',
+    name: 'Entreprise 2',
+    lastUpdateTime: '2024-10-26',
+    neighborhood: 'Quartier 2',
+    color: '#e74c3c', // Couleur de l'icône
+  },
+
+  {
+
+    // 3.8862848
+    // 11.5081216
+        latitude: 3.8575,
+        longitude: 12.5,
+        photoUrl: 'url_to_photo2',
+        name: 'Entreprise 3',
+        lastUpdateTime: '2024-10-26',
+        neighborhood: 'bonas , cradat',
+        color: 'green', // Couleur de l'icône
+      },
+  // Ajoutez d'autres entreprises...
+];
+
+
 const ClientDashboard = () => {
   const [activeTab, setActiveTab] = useState('map')
   const [selectedCompany, setSelectedCompany] = useState(null)
   const [userPoints, setUserPoints] = useState(100)
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState('');
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleUpload = async (event) => {
+    event.preventDefault();
+    if (!selectedFile) return;
+
+    // Ici, vous pouvez ajouter la logique pour publier la photo
+    // Par exemple, envoyer le fichier à une API
+    console.log('Uploading:', selectedFile);
+
+    // Réinitialiser le champ après l'envoi (si nécessaire)
+    setSelectedFile(null);
+    setPreview('');
+  };
+
+
   const recyclingCompanies = [
-    { id: 1, name: "EcoRecycle", position: [3.848, 11.502], schedule: ["Lundi", "Mercredi", "Vendredi"] },
-    { id: 2, name: "GreenWaste", position: [3.860, 11.521], schedule: ["Mardi", "Jeudi", "Samedi"] },
-    { id: 3, name: "CleanEarth", position: [3.839, 11.486], schedule: ["Lundi", "Jeudi", "Samedi"] }
+    { id: 1, name: "EcoRecycle", position: [3.848, 11.562], schedule: ["Lundi", "Mercredi", "Vendredi"] ,house:['12h','16h','13h'] ,kwatter:[
+      'Akwa',
+      'Biyem-Assi',
+      'Mfoundi',
+      'Etoudi',
+      'Nkolfoulou',
+      'Ngousso',
+      'Obili',
+      'Siddimé'
+    ]},
+    { id: 2, name: "GreenWaste", position: [3.860, 11.521], schedule: ["Mardi", "Jeudi", "Samedi"] ,house:['13h','15h','17h'],kwatter:[
+      'Bastos',
+      'Essos',
+      'Ayaba',
+      'Nkolbisson',
+      'Nkolndongo',
+      'Tsinga',
+      'Nlongkak',
+      'Mendong'
+    ]},
+    { id: 3, name: "CleanEarth", position: [3.839, 11.486], schedule: ["Lundi", "Jeudi", "Samedi"] ,house:['17h','14h','16h'],kwatter: [
+      'Biyem-Assi',
+      'Djoungolo',
+      'Yaoundé Ville',
+      'Nkolndongo',
+      'Lynx',
+      'Nkolbisson',
+      'Wada',
+      'Ngousso'
+    ]}
   ]
 
   const handleCompanyClick = (company) => {
@@ -36,6 +132,15 @@ const ClientDashboard = () => {
     }
   }
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const handleConfirm = () => {
+    setActiveTab('calendar')
+    // alert('Choix confirmé !');
+    setModalOpen(false);
+  };
+
+
   const handleAlert = () => {
     if (selectedCompany) {
       alert(`Une alerte a été envoyée à ${selectedCompany.name} pour une collecte supplémentaire`)
@@ -47,6 +152,13 @@ const ClientDashboard = () => {
   const handlePublishWaste = () => {
     alert("Votre annonce de déchets à vendre a été publiée sur notre plateforme e-commerce")
   }
+
+
+  const [description, setDescription] = useState<string>("");
+
+const handleDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  setDescription(event.target.value);
+};
 
   const renderMap = () => (
     <div className="h-[400px] w-full rounded-lg overflow-hidden">
@@ -77,12 +189,21 @@ const ClientDashboard = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4">Carte des entreprises de recyclage</h2>
             {renderMap()}
+           {/* <MapClient/> */}
             {selectedCompany && (
               <div className="mt-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 <h3 className="text-xl font-bold mb-2">{selectedCompany.name}</h3>
+                <p className="mb-2">Nos quartiers : {selectedCompany.kwatter.join(', ')}</p>
                 <p className="mb-2">Jours de collecte : {selectedCompany.schedule.join(', ')}</p>
+                <p className="mb-2">heure de collection : {selectedCompany.house.join(', ')}</p>
+
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => setModalOpen(false)}
+                    onConfirm={handleConfirm}
+                  />
                 <button
-                  onClick={handleSubscribe}
+                  onClick={()=> setModalOpen(true)}
                   className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark"
                 >
                   S'abonner
@@ -103,7 +224,42 @@ const ClientDashboard = () => {
                     <li key={index} className="mb-2">{day}</li>
                   ))}
                 </ul>
+
+
+                <div className="max-w-md mx-auto p-4 border rounded-lg shadow-lg">
+                <form onSubmit={handleUpload}>
+  <h2 className="text-lg font-semibold mb-4">Publier vos dechets </h2>
+  
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleFileChange}
+    className="mb-4 overflow-hidden"
+  />
+  
+  <textarea
+    placeholder="Ajouter une description..."
+    onChange={handleDescriptionChange}
+    className="w-full p-2 mb-4 border rounded text-gray-800"
+  ></textarea>
+  
+  {preview && (
+    <div className="mb-4">
+      <img src={preview} alt="Prévisualisation" className="w-full h-auto rounded" />
+    </div>
+  )}
+  
+  <button
+    type="submit"
+    className="bg-green-500 text-white px-4 py-2 rounded"
+  >
+    Publier
+  </button>
+</form>
+
+    </div>
               </div>
+
             ) : (
               <p>Veuillez sélectionner une entreprise sur la carte pour voir son calendrier</p>
             )}

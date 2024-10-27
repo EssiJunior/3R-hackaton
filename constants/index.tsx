@@ -1,7 +1,7 @@
 
 import { yourLogo, yourLogoDark } from '@/public/assets';
-import { IconBrandDiscord, IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandTelegram, IconBrandTwitter, IconX } from '@tabler/icons-react';
-import { BellDot, BookMarked, Database, ListTodo, Map, MapPin, Trash, X } from 'lucide-react';
+import { IconBrandDiscord, IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandTelegram, IconBrandTwitter } from '@tabler/icons-react';
+import { BellDot, BookMarked, Database, ListTodo, Map, MapPin, Trash } from 'lucide-react';
 export const navigation = [
     {
         id: "0",

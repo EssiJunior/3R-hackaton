@@ -13,8 +13,7 @@ import { logoDark, logoLight } from '@/public/assets';
 import { Button } from "@/components/Button";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import MenuSvg from "@/public/assets/images/svg/MenuSvg";
-import { Cross, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Header = ({ className }: { className?: string }) => {
     // const params = useParams();

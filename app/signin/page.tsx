@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, SetStateAction } from 'react'
 // import { useRouter } from 'next/navigation'
 import { useForm, SubmitHandler } from "react-hook-form"
 
@@ -64,11 +64,11 @@ export default function AuthPage() {
     }
   }, []);
 
-  const showForm = (formName) => {
+  const showForm = (formName: SetStateAction<string>) => {
     setActiveForm(formName);
   };
 
-  const handlePhoneInput = (e) => {
+  const handlePhoneInput = (e: { target: { value: string } }) => {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 9) {
       value = value.slice(0, 9);
@@ -79,7 +79,7 @@ export default function AuthPage() {
     e.target.value = value;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; target: { id: any } }) => {
     e.preventDefault();
     const formId = e.target.id;
     console.log('Formulaire soumis:', formId);

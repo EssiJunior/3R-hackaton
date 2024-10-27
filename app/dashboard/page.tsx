@@ -60,7 +60,7 @@ export default function DashboardPage() {
     setShowAddAgentModal(false)
   }
 
-  const handleEditAgent = (agent: React.SetStateAction<null>) => {
+  const handleEditAgent = (agent:  { id: any, name: any, role: any, performance: any }) => {
     setEditingAgent(agent)
     setShowEditAgentModal(true)
   }
@@ -167,7 +167,7 @@ export default function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {agents.map((agent: React.SetStateAction<null>) => (
+                    {agents.map((agent: { id: any, name: any, role: any, performance: any }) => (
                       <tr key={agent.id}>
                         <td className="px-6 py-4 whitespace-nowrap">{agent.name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{agent.role}</td>

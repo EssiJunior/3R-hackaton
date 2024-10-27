@@ -1,7 +1,7 @@
 // components/Modal.js
 import React from 'react';
 
-const Modal = ({ isOpen, onClose, onConfirm }) => {
+const Modal = ({ isOpen, onClose, onConfirm }:{ isOpen?: boolean, onClose?: () => void, onConfirm?: () => void }) => {
   if (!isOpen) return null;
 
   return (

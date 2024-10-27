@@ -23,6 +23,11 @@ export const navigation = [
         title: "Contact",
         url: "/contact",
     },
+    {
+        id: "4",
+        title: "Market",
+        url: "/market",
+    },
 ];
 
 
@@ -157,3 +162,81 @@ export const socials = [
         url: "#",
     },
 ];
+
+
+
+export const products = [
+    {
+      name: "Chaussures de Sport",
+      prix: 59.99,
+      image: "https://img.freepik.com/free-photo/pair-sport-shoes_144627-3794.jpg",
+      description: "Chaussures de sport légères et confortables, parfaites pour la course et les activités en plein air."
+    },
+    {
+      name: "T-shirt Basique",
+      prix: 19.99,
+      image: "https://img.freepik.com/free-photo/front-view-man-wearing-t-shirt_23-2149438286.jpg",
+      description: "T-shirt en coton doux, disponible en plusieurs couleurs."
+    },
+    {
+      name: "Sweat à Capuche",
+      prix: 39.99,
+      image: "https://img.freepik.com/free-photo/front-view-man-wearing-hoodie_23-2149438258.jpg",
+      description: "Sweat à capuche confortable avec une poche avant, idéal pour les journées fraîches."
+    },
+    {
+      name: "Casquette Classique",
+      prix: 14.99,
+      image: "https://img.freepik.com/free-photo/classic-baseball-cap-white_53876-102672.jpg",
+      description: "Casquette classique en coton avec un ajustement confortable."
+    },
+    {
+      name: "Montre en Acier",
+      prix: 89.99,
+      image: "https://img.freepik.com/free-photo/close-up-luxury-wrist-watch_144627-32654.jpg",
+      description: "Montre élégante en acier inoxydable avec un bracelet réglable."
+    },
+    {
+      name: "Jeans Décontracté",
+      prix: 49.99,
+      image: "https://img.freepik.com/free-photo/jeans-isolated-white-background_144627-3840.jpg",
+      description: "Jean décontracté, confortable et résistant, parfait pour un usage quotidien."
+    },
+    {
+      name: "Lunettes de Soleil",
+      prix: 24.99,
+      image: "https://img.freepik.com/free-photo/modern-sunglasses-isolated-white-background_53876-102635.jpg",
+      description: "Lunettes de soleil stylées avec protection UV400."
+    },
+    {
+      name: "Sac à Dos Urbain",
+      prix: 69.99,
+      image: "https://img.freepik.com/free-photo/modern-backpack-isolated-white-background_53876-102634.jpg",
+      description: "Sac à dos urbain avec plusieurs compartiments, idéal pour le quotidien."
+    },
+    {
+      name: "Chaussettes de Sport",
+      prix: 9.99,
+      image: "https://img.freepik.com/free-photo/pair-black-socks_53876-102708.jpg",
+      description: "Chaussettes de sport confortables, parfaites pour l'entraînement."
+    },
+    {
+      name: "Veste en Cuir",
+      prix: 129.99,
+      image: "https://img.freepik.com/free-photo/man-wearing-black-leather-jacket_23-2149354636.jpg",
+      description: "Veste en cuir véritable, élégante et durable."
+    },
+    {
+      name: "Baskets Décontractées",
+      prix: 44.99,
+      image: "https://img.freepik.com/free-photo/modern-sneakers-isolated-white-background_53876-102641.jpg",
+      description: "Baskets décontractées et stylées pour un look urbain."
+    },
+    {
+      name: "Chemise à Carreaux",
+      prix: 34.99,
+      image: "https://img.freepik.com/free-photo/red-plaid-shirt-isolated-white_53876-102670.jpg",
+      description: "Chemise à carreaux classique, parfaite pour un look décontracté."
+    }
+  ];
+  

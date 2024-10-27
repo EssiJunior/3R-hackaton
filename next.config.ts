@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: "img.freepik.com",
+        port: '',
+      },
     ],
     domains: [
       "api.microlink.io", // Microlink Image Preview

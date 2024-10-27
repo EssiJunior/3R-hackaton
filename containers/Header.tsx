@@ -83,7 +83,7 @@ const Header = ({ className }: { className?: string }) => {
                                 key={item.id}
                                 href={item.url}
                                 onClick={handleClick}
-                                className={`block relative font-code text-2xl uppercase text-n-9 dark:text-n-1 transition-colors hover:text-color-1 px-4 xl:px-8 py-6 md:py-8 lg:-mr-0.25 lg:text-[1.125rem] lg:font-semibold ${item.url === hash
+                                className={`block relative font-code text-2xl uppercase text-n-9 dark:text-n-1 transition-colors hover:text-color-1 px-4 xl:px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-[1.125rem] lg:font-semibold ${item.url === hash
                                         ? "z-2 lg:text-n-1 dark:text-white"
                                         : "lg:text-n-8 dark:lg:text-n-1/50"
                                     } lg:leading-5 lg:hover:text-primary lg:hover:dark:text-primary`}

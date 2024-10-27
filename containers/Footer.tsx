@@ -75,6 +75,7 @@ const Footer = () => {
                     <div className="flex flex-col gap-2 [&>a]:text-black [&>a]:dark:text-white">
                         <Link href="/">Overview</Link>
                         <Link href="/info">Informations</Link>
+                        <Link href="/client">Clients</Link>
                         <Link href="/pricing">Pricing</Link>
                         <Link href="/faq">FAQ</Link>
                     </div>

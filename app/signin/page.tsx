@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, SetStateAction } from 'react'
 // import { useRouter } from 'next/navigation'
@@ -178,7 +177,7 @@ export default function AuthPage() {
 
                 <div>
                   <button className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
-                    S'inscrire
+                    S&lsquo;inscrire
                   </button>
                 </div>
               </form>
@@ -209,7 +208,7 @@ export default function AuthPage() {
 
       {/* Responsive Image Section */}
       <div className="w-full lg:w-1/2 bg-n-2/40 dark:bg-n-8/90 hidden lg:flex items-center justify-center p-10">
-        <img src="/assets/images/signup.jpeg" alt="Auth Image" className="object-cover w-full h-full" />
+        <Image src="/assets/images/signup.jpeg" width={700} height={700} alt="Auth Image" className="object-cover w-full h-full" />
       </div>
     </div>
   );

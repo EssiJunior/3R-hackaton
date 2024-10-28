@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import SectionSvg from "@/public/assets/images/svg/SectionSvg";
 
 const Section = ({
@@ -12,8 +11,8 @@ const Section = ({
     className?: string,
     id?: string,
     crosses?: boolean,
-    crossesOffset?: any,
-    customPaddings?: any,
+    crossesOffset?: string,
+    customPaddings?: string,
     children: React.ReactNode,
 }
 ) => {

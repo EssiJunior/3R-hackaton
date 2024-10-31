@@ -88,8 +88,8 @@ const Info = () => {
     ];
 
     return (
-        <Section crosses className="!px-0 !py-10  ">
-            <main className=" bg-n-2/30 dark:bg-n-8/90 pb-10">
+        <Section crosses className="!px-0 !py-10 ">
+            <main className=" bg-n-2/30 dark:bg-n-8/90 pb-10 overflow-hidden">
                 <Timeline data={data} />
                 <div className="ml-10">
                     <Button text="Learn more >" handleClick={() => router.push('/info')} />

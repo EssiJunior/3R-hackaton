@@ -11,10 +11,10 @@ const CompanyLogos = ({ className }: { className?: string }) => {
                 <h5 className="tagline text-center text-n-13/50 dark:text-n-1/50 ">
                     We are a group of entities which fight for a better environment, and a better Cameroon
                 </h5>
-                <ul className="hidden dark:flex">
+                <ul className="hidden dark:flex flex-wrap my-10">
                     {sponsors.map((logo: string | StaticImport, index: Key | null | undefined) => (
                         <li
-                            className="flex items-center justify-center flex-1 h-[8.5rem]"
+                            className="flex items-center justify-center flex-1 h-[3.5rem] min-w-[10rem]"
                             key={index}
                         >
                             <Image

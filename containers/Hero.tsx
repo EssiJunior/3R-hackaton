@@ -8,12 +8,12 @@ const Hero = () => {
     return (
 
         <Section crosses className="!px-0 !py-10">
-            <main className="mt-32 flex items-center justify-center text-black dark:text-white py-5">
-                <div className="w-1/2 pe-32">
+            <main className="mt-32 flex max-md:flex-col items-center justify-center text-black dark:text-white py-5">
+                <div className="w-1/2 pe-32 max-md:w-full max-md:pe-0 max-lg:pe-16">
                     <h1 className="font-bold text-3xl"><span className="text-primary">3R</span> for effective <br /> Reduce, Recycle and Reuse <br /> of waste products</h1>
-                    <p className="text-[15px] leading-5 mt-3">3R is an intuitive web app designed to empower users to minimize waste. It offers tips for reducing consumption, guides for recycling materials effectively, and ideas for reusing items creatively. Connect with local services, track your impact, and foster a sustainable community for a greener future.</p>
+                    <p className="text-[15px] leading-5 mt-3 ">3R is an intuitive web app designed to empower users to minimize waste. It offers tips for reducing consumption, guides for recycling materials effectively, and ideas for reusing items creatively. Connect with local services, track your impact, and foster a sustainable community for a greener future.</p>
                 </div>
-                <div className="relative illustration flex flex-1" style={{ background: 'url(/assets/images/illustrations/blob.svg) top/cover no-repeat' }}>
+                <div className="relative illustration flex flex-1 max-md:mt-10" style={{ background: 'url(/assets/images/illustrations/blob.svg) top/cover no-repeat' }}>
                     <Image src={'assets/images/illustrations/waste.svg'} width={640} height={320} alt="blob illustration" />
 
                     <ScrollParallax isAbsolutelyPositioned>

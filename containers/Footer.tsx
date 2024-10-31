@@ -27,9 +27,9 @@ const Footer = () => {
     return (
         <main
             className={`w-full z-50  border-t border-primary lg:bg-n-1 dark:lg:bg-n-8/90 lg:backdrop-blur-sm `}
-            style={pathname.search('/dashboard') !== -1 || pathname.search('/client') !== -1 ?{display:'none'}:{}}
+            style={pathname.search('/dashboard') !== -1 || pathname.search('/client') !== -1 ? { display: 'none' } : {}}
         >
-            <section className="flex items-start justify-start flex-wrap [&>aside]:min-w-[200px] [&>aside]:h-full  [&>aside]:flex-1 [&>aside]:justify-start px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto py-12">
+            <section className="flex items-start justify-start flex-wrap gap-[75px] [&>aside]:min-w-[200px] [&>aside]:h-full  [&>aside]:flex-1 [&>aside]:justify-start px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-[1200px] m-auto py-12">
                 <aside className="">
                     <Link className="block dark:hidden w-[12rem] xl:mr-8 py-2" href="/">
                         <Image
@@ -91,7 +91,7 @@ const Footer = () => {
                         <Link href="/support">Support</Link>
                     </div>
                 </aside>
-                <aside className="flex flex-col gap-4 [&>a]:text-black [&>a]:dark:text-white">
+                <aside className="flex flex-col justify-start gap-4 [&>a]:text-black [&>a]:dark:text-white">
                     <h2 className="text-secondary dark:text-primary font-bold text-xl">
                         JOIN NEWSLETTER
                         <div className="w-[45px] h-1 bg-secondary dark:bg-primary rounded-lg mb-2"></div>
@@ -100,12 +100,13 @@ const Footer = () => {
                         placeholders={placeholders}
                         onChange={handleChange}
                         onSubmit={onSubmit}
+
                     />
                 </aside>
             </section>
-            <section className="flex justify-end items-center w-full h-[30px] bg-secondary dark:bg-primary">
-                <div className="flex flex-1 h-[2px] bg-white ms-5 rounded-lg"></div>
-                <div className="mx-5 flex gap-4">
+            <section className="flex justify-end items-center w-full h-[30px] bg-secondary dark:bg-primary mt-5 ">
+                <div className="flex flex-1 h-[2px] bg-n-8/90 ms-5 rounded-lg max-c-sm:hidden"></div>
+                <div className="mx-5 flex gap-4 max-c-sm:text-[12px] max-c-sm:w-full max-c-sm:justify-around max-c-sm:font-bold text-n-8/90">
                     <Link href="/terms">Terms & Conditions</Link>
                     <Link href="/portfolio">Private polycies</Link>
                     <Link href="/cookies">Cookies</Link>

@@ -88,7 +88,7 @@ export default function AuthPage() {
   // };
 
   return (
-    <div className="text-foreground min-h-screen flex flex-col lg:flex-row mt-24">
+    <div className="text-foreground min-h-screen flex flex-col items-center justify-center lg:flex-row mt-24">
       <div className="w-full lg:w-1/2 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="shadow-md rounded px-8 pt-6 pb-8 mb-4">

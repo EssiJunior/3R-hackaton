@@ -1,5 +1,5 @@
 
-import { yourLogo, yourLogoDark } from '@/public/assets';
+import { arthur, bevanie, essi, romaka, yourLogo, yourLogoDark, yves } from '@/public/assets';
 import { IconBrandDiscord, IconBrandFacebook, IconBrandInstagram, IconBrandLinkedin, IconBrandTelegram, IconBrandTwitter } from '@tabler/icons-react';
 import { BellDot, BookMarked, Database, ListTodo, Map, MapPin, Trash } from 'lucide-react';
 export const navigation = [
@@ -29,7 +29,6 @@ export const navigation = [
         url: "/market",
     },
 ];
-
 
 export const pricing = [
     {
@@ -163,8 +162,6 @@ export const socials = [
     },
 ];
 
-
-
 export const products = [
     {
         name: "Chaussures de Sport",
@@ -239,3 +236,57 @@ export const products = [
         description: "Chemise à carreaux classique, parfaite pour un look décontracté."
     }
 ];
+
+export const people = [
+    {
+        id: 1,
+        name: "ROMAKA Benoit",
+        designation: "Software Developer",
+        image: romaka,
+    },
+    {
+        id: 2,
+        name: "FETI Belva Samyra",
+        designation: "Software Developer",
+        image: bevanie,
+    },
+    {
+        id: 3,
+        name: "SANDJON Yves",
+        designation: "Software Developer",
+        image: yves,
+    },
+    {
+        id: 4,
+        name: "SEUMEGNI Arthur",
+        designation: "Software Developer",
+        image: arthur,
+    },
+    {
+        id: 5,
+        name: "NDANG ESSI Pierre Junior",
+        designation: "Software Developer",
+        image: essi,
+    },
+];
+
+export const groupedServices = [
+    {
+        icon: '📰',
+        title: 'Education and good ecological practices.',
+        description: "Ecological education promotes awareness of environmental issues. Adopting good practices, such as recycling, reducing waste, and using sustainable resources, fosters a healthier future.",
+        link: '/info'
+    },
+    {
+        icon: '📊',
+        title: 'Full control on your data',
+        description: "For enterpreises, experience complete control over your data with secure access, customizable privacy settings, and transparent usage policies. Empower yourself to manage, share, and protect your information on your terms.",
+        link: '/info'
+    },
+    {
+        icon: '🌍',
+        title: 'On map visualisation of information',
+        description: "On-map visualization displays data geographically, enhancing understanding of trends and patterns. It enables interactive exploration of information through layers, markers, and heat maps for informed decision-making and engagement.",
+        link: '/info'
+    },
+]

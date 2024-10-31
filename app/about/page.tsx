@@ -3,64 +3,13 @@
 import Heading from '@/components/Heading'
 import { AnimatedTooltip } from '@/components/ui/AnimatedToolTip'
 import { HoverEffect } from '@/components/ui/CardHover'
-import { arthur, bevanie, essi, logoLight, romaka, yves } from '@/public/assets'
+import { groupedServices, people } from '@/constants'
+import { logoLight } from '@/public/assets'
 import Image from 'next/image'
 import Link from 'next/link'
 // import Link from 'next/link'
 
 export default function AboutPage() {
-  const services = [
-    {
-      icon: '📰',
-      title: 'Education and good ecological practices.',
-      description: "Ecological education promotes awareness of environmental issues. Adopting good practices, such as recycling, reducing waste, and using sustainable resources, fosters a healthier future.",
-      link: '/information'
-    },
-    {
-      icon: '📊',
-      title: 'Full control on your data',
-      description: "For enterpreises, experience complete control over your data with secure access, customizable privacy settings, and transparent usage policies. Empower yourself to manage, share, and protect your information on your terms.",
-      link: '/information'
-    },
-    {
-      icon: '🌍',
-      title: 'On map visualisation of information',
-      description: "On-map visualization displays data geographically, enhancing understanding of trends and patterns. It enables interactive exploration of information through layers, markers, and heat maps for informed decision-making and engagement.",
-      link: '/information'
-    },
-  ]
-  const people = [
-    {
-      id: 1,
-      name: "ROMAKA Benoit",
-      designation: "Software Developer",
-      image: romaka,
-    },
-    {
-      id: 2,
-      name: "FETI Belva Samyra",
-      designation: "Software Developer",
-      image: bevanie,
-    },
-    {
-      id: 3,
-      name: "SANDJON Yves",
-      designation: "Software Developer",
-      image: yves,
-    },
-    {
-      id: 4,
-      name: "SEUMEGNI Arthur",
-      designation: "Software Developer",
-      image: arthur,
-    },
-    {
-      id: 5,
-      name: "NDANG ESSI Pierre Junior",
-      designation: "Software Developer",
-      image: essi,
-    },
-  ];
 
   return (
     <div className="min-h-screen text-gray-800 p-8  max-w-7xl mx-auto">
@@ -73,7 +22,7 @@ export default function AboutPage() {
 
         {/* Section À propos */}
         <div className="flex items-center mb-16">
-          <div className="relative flex-shrink-0">
+          <div className="relative flex-shrink-0 max-md:hidden">
             <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-48 h-48 bg-secondary rounded-full flex items-center justify-center text-white text-2xl font-bold">
               <Link className="block  py-2" href="/">
                 <Image
@@ -85,7 +34,7 @@ export default function AboutPage() {
               </Link>
             </div>
           </div>
-          <div className="ml-24 bg-n-2/30 dark:bg-n-8/90 px-32 py-16 rounded-lg flex-1">
+          <div className="ml-24 max-md:ml-0 bg-n-2/30 dark:bg-n-8/90 px-32 py-16 rounded-lg flex-1">
             <h2 className="text-2xl font-bold text-primary mb-4 text-black dark:text-white">WE ARE &rdquo;LES GARDIENS DE LA FORET&rdquo;</h2>
             <p className="mb-1 text-black dark:text-white">
               An important issue is face in Cameroon for already a wile. The problem is the correct use of plastic materials. 
@@ -126,7 +75,7 @@ export default function AboutPage() {
         {/* Section Services */}
         <div>
           <h2 className="text-2xl font-bold text-primary mb-4">OUR SERVICES</h2>
-          <HoverEffect items={services} />
+          <HoverEffect items={groupedServices} />
         </div>
       </div>
 

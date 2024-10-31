@@ -149,10 +149,6 @@ const page = () => {
             title: "UNEP",
             content: (
                 <div>
-                    <Heading
-                        tag="Information"
-                        title="We will never stop saying that plastic product causes pollution, here are proven catastrophes of its consequences."
-                    />
                     <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
                         Comment le secteur du tourisme peut-il se libérer du plastique ?
                     </p>
@@ -181,9 +177,9 @@ const page = () => {
     ];
 
     return (
-        <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-            <div className="mt-32 bg-n-2/30 dark:bg-n-8/90  max-w-7xl w-full">
-                <main className=" pb-10">
+        <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 pb-10">
+            <div className="mt-32 bg-n-2/30 dark:bg-n-8/90  max-w-7xl w-full overflow-hidden">
+                <main className=" pb-14">
                     <Timeline data={data} isInfoPage />
                 </main>
             </div>

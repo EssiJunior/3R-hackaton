@@ -20,8 +20,8 @@ export const navigation = [
     },
     {
         id: "3",
-        title: "Client",
-        url: "/client",
+        title: "Contact",
+        url: "/contact",
     },
     {
         id: "4",

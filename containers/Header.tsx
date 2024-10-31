@@ -141,6 +141,7 @@ const Header = ({ className }: { className?: string }) => {
 
                     }
                 </a>
+
                 <Button text="Sign In" handleClick={() => router.push('/signin')} className='max-lg:hidden' />
 
                 <div className="ml-auto lg:hidden flex items-center">
@@ -188,14 +189,21 @@ const Header = ({ className }: { className?: string }) => {
 
                         }
                     </a>
-                    <Button text="Sign In" handleClick={() => router.push("/signin")} />
+                    <Button text="Sign In" handleClick={() => router.push("/signin")} className="max-c-sm:hidden" />
+
+                    <div className="relative w-auto h-auto p-[3px] max-c-sm:flex hidden" onClick={() => router.push("/signin")}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary rounded-lg" />
+                        <div className="p-3 bg-white dark:bg-black rounded-[6px]  relative group transition duration-200 text-primary dark:text-white hover:bg-transparent hover:text-white dark:hover:bg-transparent">
+                            <Image src={'/assets/images/svg/log-in.svg'} width={24} height={24} alt={'log-in'} className="h-full w-full min-w-6"/>
+                        </div>
+                    </div>
 
                     <div onClick={toggleNavigation} className="ml-5 lg:hidden p-3 rounded-md dark:bg-n-2/40 border-2  border-n-8/90 dark:border-n-3/40">
                         {
                             openNavigation ?
-                                <X className="text-black dark:text-white"/>
+                                <X className="text-black dark:text-white" />
                                 :
-                                <Menu  className="text-black dark:text-white"/>
+                                <Menu className="text-black dark:text-white" />
                         }
                     </div>
                 </div>
